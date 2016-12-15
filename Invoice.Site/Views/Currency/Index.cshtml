@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Invoice.Definitions.Interfaces.ICurrencyData>
+
+<div id="curr-title" class="cursor-pointer currency-tracker-title">
+    <span>Kursy walut <sup>live</sup></span>
+</div>
+<div id="curr-stop" class="cursor-pointer currency-tracker-stop">
+    <img id="curr-stop-image" src="~/Images/stop-icon-white.png" alt="STOP" class="img-responsive center-block img-center" />
+</div>
+<div id="curr-panel" class="currency-tracker-panel">
+        @{
+            string txt = string.Empty;
+            foreach (var item in @Model)
+            {
+                txt += " " + item.Symbol + ":" + item.Rate.ToString();
+                @*<span style="padding:6px">@item.Symbol: @item.Rate.ToString()</span>*@
+
+            }
+            <p id="curr-list" class="currency-tracker-list">@txt</p>
+}
+</div>

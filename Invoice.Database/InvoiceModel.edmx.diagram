@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e720b92dea71483d82d1ffb8fda38f97" Name="Diagram1">
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.Address" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.BankAccount" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.Company" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.Country_SDIC" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.Currency_SDIC" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.Customer" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.FileAttachment" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.InvoiceContractorsData" Width="1.5" PointX="7.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.InvoicePosition" Width="1.5" PointX="12" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.TaxRate" Width="1.5" PointX="9.75" PointY="11" IsExpanded="true" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_Company_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_Customer_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_BankAccount_Currency_SDIC" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_Company_BankAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_Customer_BankAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_Customer_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_InvoicePosition_TaxRate" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.AspNetRoles" Width="1.5" PointX="12.375" PointY="10.5" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.AspNetUserClaims" Width="1.5" PointX="16.875" PointY="11.625" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.AspNetUserLogins" Width="1.5" PointX="16.875" PointY="9" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.AspNetUsers" Width="1.5" PointX="14.625" PointY="9.375" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="MvcInvoiceDbModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.Invoice" Width="1.5" PointX="9.75" PointY="3.125" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.Summary" Width="1.5" PointX="12" PointY="0.75" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_Invoice_Company" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_Invoice_Currency_SDIC" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_Invoice_Customer" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_FileAttachment_Invoice" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_Invoice_InvoiceContractorsData" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_InvoicePosition_Invoice" />
+        <AssociationConnector Association="MvcInvoiceDbModel.SummaryInvoice" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.RssSiteChannel" Width="1.5" PointX="3" PointY="14" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.RssChannel_SDIC" Width="1.5" PointX="0.75" PointY="13.75" />
+        <AssociationConnector Association="MvcInvoiceDbModel.FK_RssSiteChannel_RssChannel_SDIC" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.ParameterGlobal" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.Post" Width="1.5" PointX="14.375" PointY="1" />
+        <EntityTypeShape EntityType="MvcInvoiceDbModel.PostCategory_SDIC" Width="1.5" PointX="16.625" PointY="1" />
+        <AssociationConnector Association="MvcInvoiceDbModel.PostCategories" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

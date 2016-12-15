@@ -1,0 +1,1618 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MvcInvoiceDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Street" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="BuildingNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="HomeNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="PostCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="DataSearch" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Number" Type="nvarchar" MaxLength="26" Nullable="false" />
+          <Property Name="CurrencyId" Type="int" Nullable="false" />
+          <Property Name="DataSearch" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Nip" Type="nvarchar" MaxLength="15" />
+          <Property Name="Regon" Type="nvarchar" MaxLength="15" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Symbol" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="BankAccountId" Type="int" />
+          <Property Name="AddressId" Type="int" />
+          <Property Name="DataSearch" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Country_SDIC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Symbol" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="OrderNumber" Type="int" Nullable="false" />
+          <Property Name="Language" Type="nvarchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Currency_SDIC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Symbol" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="OrderNumber" Type="int" Nullable="false" />
+          <Property Name="Language" Type="nvarchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Symbol" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nip" Type="nvarchar" MaxLength="15" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="BankAccountId" Type="int" />
+          <Property Name="AddressId" Type="int" />
+          <Property Name="DataSearch" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="FileAttachment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FileContent" Type="binary" MaxLength="50" Nullable="false" />
+          <Property Name="CreationDate" Type="date" Nullable="false" />
+          <Property Name="InvoiceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="DocumentDate" Type="date" />
+          <Property Name="EntryDate" Type="date" />
+          <Property Name="PaymentDate" Type="date" />
+          <Property Name="RecieveDate" Type="date" />
+          <Property Name="ExchangeRate" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="IsNet" Type="bit" Nullable="false" />
+          <Property Name="IsForeignCustomer" Type="bit" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="AmountNetPln" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="AmountNetCurrency" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="AmountTaxPln" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="AmountTaxCurrency" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="AmountGrossPln" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="AmountGrossCurrency" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="CurrencyId" Type="int" />
+          <Property Name="InvoiceContractorsDataId" Type="int" Nullable="false" />
+          <Property Name="DataSearch" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="InvoiceContractorsData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CompanyAddress" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CompanyNip" Type="nvarchar" MaxLength="15" />
+          <Property Name="CompanyBankAccountNumber" Type="nvarchar" MaxLength="26" />
+          <Property Name="CompanyBankName" Type="nvarchar" MaxLength="255" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CustomerAddress" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CustomerNip" Type="nvarchar" MaxLength="15" />
+          <Property Name="CustomerBankAccountNumber" Type="nvarchar" MaxLength="26" />
+          <Property Name="CustomerBankName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="InvoicePosition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AmountNetPln" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="AmountNetCurrency" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="AmountTaxPln" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="AmountTaxCurrency" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="AmountGrossPln" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="AmountGrossCurrency" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TaxRateId" Type="int" Nullable="false" />
+          <Property Name="InvoiceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParameterGlobal">
+          <Key>
+            <PropertyRef Name="KeyName" />
+          </Key>
+          <Property Name="KeyName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Header" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+          <Property Name="IsImportant" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostCategories">
+          <Key>
+            <PropertyRef Name="PostId" />
+            <PropertyRef Name="PostCategoryId" />
+          </Key>
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="PostCategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostCategory_SDIC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Symbol" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="OrderNumber" Type="int" Nullable="false" />
+          <Property Name="Language" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Color" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RssChannel_SDIC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Symbol" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RssSiteChannel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="RssChannelId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Summary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Sales" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="SalesTax" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="Revenues" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="RevenuesTax" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="DataSearch" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SummaryInvoice">
+          <Key>
+            <PropertyRef Name="SummaryId" />
+            <PropertyRef Name="InvoiceId" />
+          </Key>
+          <Property Name="SummaryId" Type="int" Nullable="false" />
+          <Property Name="InvoiceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaxRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Symbol" Type="nvarchar" MaxLength="10" />
+          <Property Name="Rate" Type="decimal" Precision="19" Scale="4" />
+          <Property Name="DateFrom" Type="date" Nullable="false" />
+          <Property Name="DateTo" Type="date" />
+          <Property Name="OrderNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BankAccount_Currency_SDIC">
+          <End Role="Currency_SDIC" Type="Self.Currency_SDIC" Multiplicity="1" />
+          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency_SDIC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankAccount">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_BankAccount">
+          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="0..1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="BankAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_BankAccount">
+          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="BankAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileAttachment_Invoice">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="FileAttachment" Type="Self.FileAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileAttachment">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Currency_SDIC">
+          <End Role="Currency_SDIC" Type="Self.Currency_SDIC" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency_SDIC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_InvoiceContractorsData">
+          <End Role="InvoiceContractorsData" Type="Self.InvoiceContractorsData" Multiplicity="1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceContractorsData">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="InvoiceContractorsDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoicePosition_Invoice">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="InvoicePosition" Type="Self.InvoicePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoicePosition">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoicePosition_TaxRate">
+          <End Role="TaxRate" Type="Self.TaxRate" Multiplicity="1" />
+          <End Role="InvoicePosition" Type="Self.InvoicePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaxRate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoicePosition">
+              <PropertyRef Name="TaxRateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostCategories_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="1" />
+          <End Role="PostCategories" Type="Self.PostCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostCategories">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostCategories_PostCategory_SDIC">
+          <End Role="PostCategory_SDIC" Type="Self.PostCategory_SDIC" Multiplicity="1" />
+          <End Role="PostCategories" Type="Self.PostCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostCategory_SDIC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PostCategories">
+              <PropertyRef Name="PostCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RssSiteChannel_RssChannel_SDIC">
+          <End Role="RssChannel_SDIC" Type="Self.RssChannel_SDIC" Multiplicity="1" />
+          <End Role="RssSiteChannel" Type="Self.RssSiteChannel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RssChannel_SDIC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RssSiteChannel">
+              <PropertyRef Name="RssChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SummaryInvoice_Invoice">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+          <End Role="SummaryInvoice" Type="Self.SummaryInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SummaryInvoice">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SummaryInvoice_Summary">
+          <End Role="Summary" Type="Self.Summary" Multiplicity="1" />
+          <End Role="SummaryInvoice" Type="Self.SummaryInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Summary">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SummaryInvoice">
+              <PropertyRef Name="SummaryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MvcInvoiceDbModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankAccount" EntityType="Self.BankAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country_SDIC" EntityType="Self.Country_SDIC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currency_SDIC" EntityType="Self.Currency_SDIC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileAttachment" EntityType="Self.FileAttachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceContractorsData" EntityType="Self.InvoiceContractorsData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoicePosition" EntityType="Self.InvoicePosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParameterGlobal" EntityType="Self.ParameterGlobal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostCategories" EntityType="Self.PostCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostCategory_SDIC" EntityType="Self.PostCategory_SDIC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RssChannel_SDIC" EntityType="Self.RssChannel_SDIC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RssSiteChannel" EntityType="Self.RssSiteChannel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Summary" EntityType="Self.Summary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SummaryInvoice" EntityType="Self.SummaryInvoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaxRate" EntityType="Self.TaxRate" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BankAccount_Currency_SDIC" Association="Self.FK_BankAccount_Currency_SDIC">
+            <End Role="Currency_SDIC" EntitySet="Currency_SDIC" />
+            <End Role="BankAccount" EntitySet="BankAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_Address" Association="Self.FK_Company_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_BankAccount" Association="Self.FK_Company_BankAccount">
+            <End Role="BankAccount" EntitySet="BankAccount" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Address" Association="Self.FK_Customer_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_BankAccount" Association="Self.FK_Customer_BankAccount">
+            <End Role="BankAccount" EntitySet="BankAccount" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Company" Association="Self.FK_Customer_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileAttachment_Invoice" Association="Self.FK_FileAttachment_Invoice">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="FileAttachment" EntitySet="FileAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Company" Association="Self.FK_Invoice_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Currency_SDIC" Association="Self.FK_Invoice_Currency_SDIC">
+            <End Role="Currency_SDIC" EntitySet="Currency_SDIC" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Customer" Association="Self.FK_Invoice_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_InvoiceContractorsData" Association="Self.FK_Invoice_InvoiceContractorsData">
+            <End Role="InvoiceContractorsData" EntitySet="InvoiceContractorsData" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoicePosition_Invoice" Association="Self.FK_InvoicePosition_Invoice">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="InvoicePosition" EntitySet="InvoicePosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoicePosition_TaxRate" Association="Self.FK_InvoicePosition_TaxRate">
+            <End Role="TaxRate" EntitySet="TaxRate" />
+            <End Role="InvoicePosition" EntitySet="InvoicePosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostCategories_Post" Association="Self.FK_PostCategories_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="PostCategories" EntitySet="PostCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostCategories_PostCategory_SDIC" Association="Self.FK_PostCategories_PostCategory_SDIC">
+            <End Role="PostCategory_SDIC" EntitySet="PostCategory_SDIC" />
+            <End Role="PostCategories" EntitySet="PostCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RssSiteChannel_RssChannel_SDIC" Association="Self.FK_RssSiteChannel_RssChannel_SDIC">
+            <End Role="RssChannel_SDIC" EntitySet="RssChannel_SDIC" />
+            <End Role="RssSiteChannel" EntitySet="RssSiteChannel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SummaryInvoice_Invoice" Association="Self.FK_SummaryInvoice_Invoice">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="SummaryInvoice" EntitySet="SummaryInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SummaryInvoice_Summary" Association="Self.FK_SummaryInvoice_Summary">
+            <End Role="Summary" EntitySet="Summary" />
+            <End Role="SummaryInvoice" EntitySet="SummaryInvoice" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MvcInvoiceDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BuildingNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="HomeNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PostCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Company_Address" FromRole="Address" ToRole="Company" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_Address" FromRole="Address" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="BankAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="26" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+          <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Currency_SDIC" Relationship="Self.FK_BankAccount_Currency_SDIC" FromRole="BankAccount" ToRole="Currency_SDIC" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Company_BankAccount" FromRole="BankAccount" ToRole="Company" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_BankAccount" FromRole="BankAccount" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nip" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Regon" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Symbol" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BankAccountId" Type="Int32" />
+          <Property Name="AddressId" Type="Int32" />
+          <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Company_Address" FromRole="Company" ToRole="Address" />
+          <NavigationProperty Name="BankAccount" Relationship="Self.FK_Company_BankAccount" FromRole="Company" ToRole="BankAccount" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_Company" FromRole="Company" ToRole="Customer" />
+          <NavigationProperty Name="Invoice" Relationship="MvcInvoiceDbModel.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="Country_SDIC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Symbol" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrderNumber" Type="Int32" Nullable="false" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Currency_SDIC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Symbol" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrderNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BankAccount" Relationship="Self.FK_BankAccount_Currency_SDIC" FromRole="Currency_SDIC" ToRole="BankAccount" />
+          <NavigationProperty Name="Invoice" Relationship="MvcInvoiceDbModel.FK_Invoice_Currency_SDIC" FromRole="Currency_SDIC" ToRole="Invoice" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Symbol" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nip" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="BankAccountId" Type="Int32" />
+          <Property Name="AddressId" Type="Int32" />
+          <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Customer_Address" FromRole="Customer" ToRole="Address" />
+          <NavigationProperty Name="BankAccount" Relationship="Self.FK_Customer_BankAccount" FromRole="Customer" ToRole="BankAccount" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Customer_Company" FromRole="Customer" ToRole="Company" />
+          <NavigationProperty Name="Invoice" Relationship="MvcInvoiceDbModel.FK_Invoice_Customer" FromRole="Customer" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="FileAttachment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FileContent" Type="Binary" MaxLength="50" FixedLength="true" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Invoice" Relationship="MvcInvoiceDbModel.FK_FileAttachment_Invoice" FromRole="FileAttachment" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="InvoiceContractorsData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyNip" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyBankAccountNumber" Type="String" MaxLength="26" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyBankName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerNip" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerBankAccountNumber" Type="String" MaxLength="26" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerBankName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Invoice" Relationship="MvcInvoiceDbModel.FK_Invoice_InvoiceContractorsData" FromRole="InvoiceContractorsData" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="InvoicePosition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AmountNetPln" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="AmountNetCurrency" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="AmountTaxPln" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="AmountTaxCurrency" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="AmountGrossPln" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="AmountGrossCurrency" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TaxRateId" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TaxRate" Relationship="Self.FK_InvoicePosition_TaxRate" FromRole="InvoicePosition" ToRole="TaxRate" />
+          <NavigationProperty Name="Invoice" Relationship="MvcInvoiceDbModel.FK_InvoicePosition_Invoice" FromRole="InvoicePosition" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="TaxRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Symbol" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DateFrom" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateTo" Type="DateTime" Precision="0" />
+          <Property Name="OrderNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InvoicePosition" Relationship="Self.FK_InvoicePosition_TaxRate" FromRole="TaxRate" ToRole="InvoicePosition" />
+        </EntityType>
+        <Association Name="FK_Company_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BankAccount_Currency_SDIC">
+          <End Role="Currency_SDIC" Type="Self.Currency_SDIC" Multiplicity="1" />
+          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency_SDIC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankAccount">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_BankAccount">
+          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="0..1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="BankAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_BankAccount">
+          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="BankAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoicePosition_TaxRate">
+          <End Role="TaxRate" Type="Self.TaxRate" Multiplicity="1" />
+          <End Role="InvoicePosition" Type="Self.InvoicePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaxRate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoicePosition">
+              <PropertyRef Name="TaxRateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MvcInvoiceDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Address" EntityType="Self.Address" />
+          <EntitySet Name="BankAccount" EntityType="Self.BankAccount" />
+          <EntitySet Name="Company" EntityType="Self.Company" />
+          <EntitySet Name="Country_SDIC" EntityType="Self.Country_SDIC" />
+          <EntitySet Name="Currency_SDIC" EntityType="Self.Currency_SDIC" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="FileAttachment" EntityType="Self.FileAttachment" />
+          <EntitySet Name="InvoiceContractorsData" EntityType="Self.InvoiceContractorsData" />
+          <EntitySet Name="InvoicePosition" EntityType="Self.InvoicePosition" />
+          <EntitySet Name="TaxRate" EntityType="Self.TaxRate" />
+          <AssociationSet Name="FK_Company_Address" Association="Self.FK_Company_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Address" Association="Self.FK_Customer_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BankAccount_Currency_SDIC" Association="Self.FK_BankAccount_Currency_SDIC">
+            <End Role="Currency_SDIC" EntitySet="Currency_SDIC" />
+            <End Role="BankAccount" EntitySet="BankAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_BankAccount" Association="Self.FK_Company_BankAccount">
+            <End Role="BankAccount" EntitySet="BankAccount" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_BankAccount" Association="Self.FK_Customer_BankAccount">
+            <End Role="BankAccount" EntitySet="BankAccount" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Company" Association="Self.FK_Customer_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoicePosition_TaxRate" Association="Self.FK_InvoicePosition_TaxRate">
+            <End Role="TaxRate" EntitySet="TaxRate" />
+            <End Role="InvoicePosition" EntitySet="InvoicePosition" />
+          </AssociationSet>
+          <EntitySet Name="AspNetRoles" EntityType="MvcInvoiceDbModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="MvcInvoiceDbModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="MvcInvoiceDbModel.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="MvcInvoiceDbModel.AspNetUsers" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="MvcInvoiceDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="MvcInvoiceDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="MvcInvoiceDbModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Invoice" EntityType="MvcInvoiceDbModel.Invoice" />
+          <EntitySet Name="Summary" EntityType="MvcInvoiceDbModel.Summary" />
+          <AssociationSet Name="FK_Invoice_Company" Association="MvcInvoiceDbModel.FK_Invoice_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Currency_SDIC" Association="MvcInvoiceDbModel.FK_Invoice_Currency_SDIC">
+            <End Role="Currency_SDIC" EntitySet="Currency_SDIC" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Customer" Association="MvcInvoiceDbModel.FK_Invoice_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileAttachment_Invoice" Association="MvcInvoiceDbModel.FK_FileAttachment_Invoice">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="FileAttachment" EntitySet="FileAttachment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_InvoiceContractorsData" Association="MvcInvoiceDbModel.FK_Invoice_InvoiceContractorsData">
+            <End Role="InvoiceContractorsData" EntitySet="InvoiceContractorsData" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvoicePosition_Invoice" Association="MvcInvoiceDbModel.FK_InvoicePosition_Invoice">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="InvoicePosition" EntitySet="InvoicePosition" />
+          </AssociationSet>
+          <AssociationSet Name="SummaryInvoice" Association="MvcInvoiceDbModel.SummaryInvoice">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Summary" EntitySet="Summary" />
+          </AssociationSet>
+          <EntitySet Name="RssSiteChannel" EntityType="MvcInvoiceDbModel.RssSiteChannel" />
+          <EntitySet Name="RssChannel_SDIC" EntityType="MvcInvoiceDbModel.RssChannel_SDIC" />
+          <AssociationSet Name="FK_RssSiteChannel_RssChannel_SDIC" Association="MvcInvoiceDbModel.FK_RssSiteChannel_RssChannel_SDIC">
+            <End Role="RssChannel_SDIC" EntitySet="RssChannel_SDIC" />
+            <End Role="RssSiteChannel" EntitySet="RssSiteChannel" />
+          </AssociationSet>
+          <EntitySet Name="ParameterGlobal" EntityType="MvcInvoiceDbModel.ParameterGlobal" />
+          <EntitySet Name="Post" EntityType="MvcInvoiceDbModel.Post" />
+          <EntitySet Name="PostCategory_SDIC" EntityType="MvcInvoiceDbModel.PostCategory_SDIC" />
+          <AssociationSet Name="PostCategories" Association="MvcInvoiceDbModel.PostCategories">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="PostCategory_SDIC" EntitySet="PostCategory_SDIC" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="MvcInvoiceDbModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="MvcInvoiceDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="MvcInvoiceDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="MvcInvoiceDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="MvcInvoiceDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="MvcInvoiceDbModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="MvcInvoiceDbModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MvcInvoiceDbModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="MvcInvoiceDbModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MvcInvoiceDbModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="MvcInvoiceDbModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="MvcInvoiceDbModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentDate" Type="DateTime" Precision="0" />
+          <Property Name="EntryDate" Type="DateTime" Precision="0" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="0" />
+          <Property Name="RecieveDate" Type="DateTime" Precision="0" />
+          <Property Name="ExchangeRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IsNet" Type="Boolean" Nullable="false" />
+          <Property Name="IsForeignCustomer" Type="Boolean" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AmountNetPln" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AmountNetCurrency" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AmountTaxPln" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AmountTaxCurrency" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AmountGrossPln" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AmountGrossCurrency" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="CurrencyId" Type="Int32" />
+          <Property Name="InvoiceContractorsDataId" Type="Int32" Nullable="false" />
+          <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="MvcInvoiceDbModel.FK_Invoice_Company" FromRole="Invoice" ToRole="Company" />
+          <NavigationProperty Name="Currency_SDIC" Relationship="MvcInvoiceDbModel.FK_Invoice_Currency_SDIC" FromRole="Invoice" ToRole="Currency_SDIC" />
+          <NavigationProperty Name="Customer" Relationship="MvcInvoiceDbModel.FK_Invoice_Customer" FromRole="Invoice" ToRole="Customer" />
+          <NavigationProperty Name="FileAttachment" Relationship="MvcInvoiceDbModel.FK_FileAttachment_Invoice" FromRole="Invoice" ToRole="FileAttachment" />
+          <NavigationProperty Name="InvoiceContractorsData" Relationship="MvcInvoiceDbModel.FK_Invoice_InvoiceContractorsData" FromRole="Invoice" ToRole="InvoiceContractorsData" />
+          <NavigationProperty Name="InvoicePosition" Relationship="MvcInvoiceDbModel.FK_InvoicePosition_Invoice" FromRole="Invoice" ToRole="InvoicePosition" />
+          <NavigationProperty Name="Summary" Relationship="MvcInvoiceDbModel.SummaryInvoice" FromRole="Invoice" ToRole="Summary" />
+        </EntityType>
+        <EntityType Name="Summary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Sales" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SalesTax" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Revenues" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RevenuesTax" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Invoice" Relationship="MvcInvoiceDbModel.SummaryInvoice" FromRole="Summary" ToRole="Invoice" />
+        </EntityType>
+        <Association Name="FK_Invoice_Company">
+          <End Type="MvcInvoiceDbModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="MvcInvoiceDbModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Currency_SDIC">
+          <End Type="MvcInvoiceDbModel.Currency_SDIC" Role="Currency_SDIC" Multiplicity="0..1" />
+          <End Type="MvcInvoiceDbModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency_SDIC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Customer">
+          <End Type="MvcInvoiceDbModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="MvcInvoiceDbModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileAttachment_Invoice">
+          <End Type="MvcInvoiceDbModel.Invoice" Role="Invoice" Multiplicity="1" />
+          <End Type="MvcInvoiceDbModel.FileAttachment" Role="FileAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileAttachment">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_InvoiceContractorsData">
+          <End Type="MvcInvoiceDbModel.InvoiceContractorsData" Role="InvoiceContractorsData" Multiplicity="1" />
+          <End Type="MvcInvoiceDbModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceContractorsData">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="InvoiceContractorsDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvoicePosition_Invoice">
+          <End Type="MvcInvoiceDbModel.Invoice" Role="Invoice" Multiplicity="1" />
+          <End Type="MvcInvoiceDbModel.InvoicePosition" Role="InvoicePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoicePosition">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SummaryInvoice">
+          <End Type="MvcInvoiceDbModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <End Type="MvcInvoiceDbModel.Summary" Role="Summary" Multiplicity="*" />
+        </Association>
+        <EntityType Name="RssSiteChannel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="RssChannelId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RssChannel_SDIC" Relationship="MvcInvoiceDbModel.FK_RssSiteChannel_RssChannel_SDIC" FromRole="RssSiteChannel" ToRole="RssChannel_SDIC" />
+        </EntityType>
+        <EntityType Name="RssChannel_SDIC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="RssSiteChannel" Relationship="MvcInvoiceDbModel.FK_RssSiteChannel_RssChannel_SDIC" FromRole="RssChannel_SDIC" ToRole="RssSiteChannel" />
+        </EntityType>
+        <Association Name="FK_RssSiteChannel_RssChannel_SDIC">
+          <End Type="MvcInvoiceDbModel.RssChannel_SDIC" Role="RssChannel_SDIC" Multiplicity="1" />
+          <End Type="MvcInvoiceDbModel.RssSiteChannel" Role="RssSiteChannel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RssChannel_SDIC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RssSiteChannel">
+              <PropertyRef Name="RssChannelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ParameterGlobal">
+          <Key>
+            <PropertyRef Name="KeyName" />
+          </Key>
+          <Property Name="KeyName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Header" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsImportant" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PostCategory_SDIC" Relationship="MvcInvoiceDbModel.PostCategories" FromRole="Post" ToRole="PostCategory_SDIC" />
+        </EntityType>
+        <EntityType Name="PostCategory_SDIC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNumber" Type="Int32" Nullable="false" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Post" Relationship="MvcInvoiceDbModel.PostCategories" FromRole="PostCategory_SDIC" ToRole="Post" />
+        </EntityType>
+        <Association Name="PostCategories">
+          <End Type="MvcInvoiceDbModel.Post" Role="Post" Multiplicity="*" />
+          <End Type="MvcInvoiceDbModel.PostCategory_SDIC" Role="PostCategory_SDIC" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MvcInvoiceDbModelStoreContainer" CdmEntityContainer="MvcInvoiceDbEntities">
+          <EntitySetMapping Name="Address">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="BuildingNumber" ColumnName="BuildingNumber" />
+                <ScalarProperty Name="HomeNumber" ColumnName="HomeNumber" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="DataSearch" ColumnName="DataSearch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankAccount">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.BankAccount">
+              <MappingFragment StoreEntitySet="BankAccount">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="DataSearch" ColumnName="DataSearch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Company">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Nip" ColumnName="Nip" />
+                <ScalarProperty Name="Regon" ColumnName="Regon" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="BankAccountId" ColumnName="BankAccountId" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="DataSearch" ColumnName="DataSearch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country_SDIC">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.Country_SDIC">
+              <MappingFragment StoreEntitySet="Country_SDIC">
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currency_SDIC">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.Currency_SDIC">
+              <MappingFragment StoreEntitySet="Currency_SDIC">
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Nip" ColumnName="Nip" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="BankAccountId" ColumnName="BankAccountId" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="DataSearch" ColumnName="DataSearch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileAttachment">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.FileAttachment">
+              <MappingFragment StoreEntitySet="FileAttachment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileContent" ColumnName="FileContent" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceContractorsData">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.InvoiceContractorsData">
+              <MappingFragment StoreEntitySet="InvoiceContractorsData">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+                <ScalarProperty Name="CompanyNip" ColumnName="CompanyNip" />
+                <ScalarProperty Name="CompanyBankAccountNumber" ColumnName="CompanyBankAccountNumber" />
+                <ScalarProperty Name="CompanyBankName" ColumnName="CompanyBankName" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+                <ScalarProperty Name="CustomerNip" ColumnName="CustomerNip" />
+                <ScalarProperty Name="CustomerBankAccountNumber" ColumnName="CustomerBankAccountNumber" />
+                <ScalarProperty Name="CustomerBankName" ColumnName="CustomerBankName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoicePosition">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.InvoicePosition">
+              <MappingFragment StoreEntitySet="InvoicePosition">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AmountNetPln" ColumnName="AmountNetPln" />
+                <ScalarProperty Name="AmountNetCurrency" ColumnName="AmountNetCurrency" />
+                <ScalarProperty Name="AmountTaxPln" ColumnName="AmountTaxPln" />
+                <ScalarProperty Name="AmountTaxCurrency" ColumnName="AmountTaxCurrency" />
+                <ScalarProperty Name="AmountGrossPln" ColumnName="AmountGrossPln" />
+                <ScalarProperty Name="AmountGrossCurrency" ColumnName="AmountGrossCurrency" />
+                <ScalarProperty Name="TaxRateId" ColumnName="TaxRateId" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaxRate">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.TaxRate">
+              <MappingFragment StoreEntitySet="TaxRate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="MvcInvoiceDbModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Invoice">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="DataSearch" ColumnName="DataSearch" />
+                <ScalarProperty Name="InvoiceContractorsDataId" ColumnName="InvoiceContractorsDataId" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="AmountGrossCurrency" ColumnName="AmountGrossCurrency" />
+                <ScalarProperty Name="AmountGrossPln" ColumnName="AmountGrossPln" />
+                <ScalarProperty Name="AmountTaxCurrency" ColumnName="AmountTaxCurrency" />
+                <ScalarProperty Name="AmountTaxPln" ColumnName="AmountTaxPln" />
+                <ScalarProperty Name="AmountNetCurrency" ColumnName="AmountNetCurrency" />
+                <ScalarProperty Name="AmountNetPln" ColumnName="AmountNetPln" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="IsForeignCustomer" ColumnName="IsForeignCustomer" />
+                <ScalarProperty Name="IsNet" ColumnName="IsNet" />
+                <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+                <ScalarProperty Name="RecieveDate" ColumnName="RecieveDate" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="DocumentDate" ColumnName="DocumentDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Summary">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.Summary">
+              <MappingFragment StoreEntitySet="Summary">
+                <ScalarProperty Name="DataSearch" ColumnName="DataSearch" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="RevenuesTax" ColumnName="RevenuesTax" />
+                <ScalarProperty Name="Revenues" ColumnName="Revenues" />
+                <ScalarProperty Name="SalesTax" ColumnName="SalesTax" />
+                <ScalarProperty Name="Sales" ColumnName="Sales" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="SummaryInvoice" TypeName="MvcInvoiceDbModel.SummaryInvoice" StoreEntitySet="SummaryInvoice">
+            <EndProperty Name="Summary">
+              <ScalarProperty Name="Id" ColumnName="SummaryId" />
+            </EndProperty>
+            <EndProperty Name="Invoice">
+              <ScalarProperty Name="Id" ColumnName="InvoiceId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="RssSiteChannel">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.RssSiteChannel">
+              <MappingFragment StoreEntitySet="RssSiteChannel">
+                <ScalarProperty Name="RssChannelId" ColumnName="RssChannelId" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RssChannel_SDIC">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.RssChannel_SDIC">
+              <MappingFragment StoreEntitySet="RssChannel_SDIC">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParameterGlobal">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.ParameterGlobal">
+              <MappingFragment StoreEntitySet="ParameterGlobal">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="KeyName" ColumnName="KeyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="IsImportant" ColumnName="IsImportant" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostCategory_SDIC">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.PostCategory_SDIC">
+              <MappingFragment StoreEntitySet="PostCategory_SDIC">
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PostCategories" TypeName="MvcInvoiceDbModel.PostCategories" StoreEntitySet="PostCategories">
+            <EndProperty Name="PostCategory_SDIC">
+              <ScalarProperty Name="Id" ColumnName="PostCategoryId" />
+            </EndProperty>
+            <EndProperty Name="Post">
+              <ScalarProperty Name="Id" ColumnName="PostId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

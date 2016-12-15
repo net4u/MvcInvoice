@@ -1,0 +1,249 @@
+﻿@import url(http://fonts.googleapis.com/css?family=Oswald);
+/*.invoice-navbar-action {
+    min-height: 30px !important;
+}
+
+.invoice-navbar-action .navbar-nav > li > a {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}*/
+/*
+    Global
+*/
+body {
+    background-color: #eeeef0;
+}
+
+textarea {
+    resize: none;
+}
+
+a.inactive {
+    cursor: pointer;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.ajax-page-loading {
+    position: relative;
+    width: 100%;
+    padding-bottom: 25%;
+    float: left;
+}
+
+    .ajax-page-loading img {
+        height: 100%;
+        position: absolute;
+        left: 40%;
+    }
+
+/*
+    Currency moving panel
+*/
+
+.currency-tracker-title {
+    float: left;
+    background-color: cadetblue;
+    height: 2em;
+    width: 10%;
+    overflow: hidden;
+    padding: 0.5%;
+}
+
+    .currency-tracker-title span {
+        color: #fff;
+        font-family: Impact, Charcoal, sans-serif;
+        word-spacing: 0.2em;
+        font-size: 1em;
+    }
+
+.currency-tracker-panel {
+    float: left;
+    background-color: white;
+    width: 87.5%;
+    overflow: hidden;
+    height: 2em;
+    padding: 0.5%;
+}
+
+.currency-tracker-stop {
+    float: right;
+    background-color: cadetblue;
+    width: 2.5%;
+    height: 2em;
+    overflow: hidden;
+    text-align: center;
+    padding: 0.1em;
+    position: relative;
+}
+
+    .currency-tracker-stop img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+.currency-tracker-list {
+    white-space: nowrap;
+    font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+    color: black;
+    vertical-align: middle;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    position: relative;
+    -webkit-animation: anim 40.5s infinite;
+    animation: anim 40.5s infinite;
+    -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
+    animation-timing-function: linear;
+}
+
+    .currency-tracker-list:hover {
+        -webkit-animation-play-state: paused;
+        -moz-animation-play-state: paused;
+        -o-animation-play-state: paused;
+        animation-play-state: paused;
+    }
+
+@-webkit-keyframes anim {
+    from {
+        left: 0%;
+    }
+
+    to {
+        left: -100%;
+    }
+}
+
+@keyframes anim {
+    from {
+        left: 0%;
+    }
+
+    to {
+        left: -100%;
+    }
+}
+
+.currency-tracker-stop:hover + #currency-tracker-panel > p {
+    -webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+    -o-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+.animation-paused {
+    -webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+    -o-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+@media screen and (max-width: 1200px) {
+    .currency-tracker-title span {
+        font-size: 70%;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .currency-tracker-title {
+        width: 12.5%;
+    }
+
+        .currency-tracker-title span {
+            font-size: 60%;
+            width: 12.5%;
+        }
+
+    .currency-tracker-stop {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .currency-tracker-title {
+        display: none;
+    }
+
+    .currency-tracker-stop {
+        display: none;
+    }
+
+    .currency-tracker-panel {
+        width: 100%;
+    }
+
+    .home-post-image {
+        display: none;
+    }
+}
+
+/*
+    Home Posts
+*/
+
+.home-post {
+    background-color: white;
+    border-radius: 4px;
+    margin-bottom: 2%;
+    border: 1px solid #dedede;
+}
+
+.home-post-important {
+    border: 3px solid DarkCyan !important;
+}
+
+.home-post-title {
+    padding: 2% 0 0 0;
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+}
+
+.home-post-image {
+    padding: 2% 0 1% 2%;
+}
+
+    .home-post-image img {
+        width: 90px;
+    }
+
+.home-post-categories {
+    list-style-type: none;
+    margin: 0;
+    padding: 1% 0 0 0;
+    overflow: hidden;
+}
+
+    .home-post-categories li {
+        float: left;
+        display: block;
+        margin-right: 1%;
+        padding: 0.4% 0.8%;
+        text-align: center;
+        color: grey;
+        border: 1px solid #dedede;
+        border-radius: 0.5em;
+        -moz-border-radius: 0.5em;
+    }
+
+.home-post-content {
+    padding: 0.8em 0 0.5em 0;
+}

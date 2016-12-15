@@ -1,0 +1,69 @@
+﻿@model Invoice.Site.Models.Post.PostEditModel
+
+@using (Html.BeginForm(MVC.Home.ActionNames.Create, MVC.Home.Name, FormMethod.Post, new { enctype = "multipart/form-data", id = "form-post" }))
+{
+    <div class="ErrorMessage">
+        @Html.ValidationSummary(false)
+    </div>
+    <div id="post-ajax-error-placeholder">
+    </div>
+
+    <div class="controls">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Header)
+                    @Html.TextBoxFor(model => model.Header, new { @class = "form-control", placeholder = "fill header here..." })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.File)
+                    <div class="input-group">
+                        <label class="input-group-btn">
+                            <span class="btn btn-default btn-file">
+                                Browse&hellip; @*<input type="file" style="display: none;" name="File">*@
+                                @Html.TextBoxFor(model => model.File, new { type = "file", style = "display: none", name = "file" })
+                            </span>
+                        </label>
+                        <input type="text" class="form-control" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsImportant)
+                    @Html.CheckBoxFor(model => model.IsImportant)
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Message)
+                    @Html.TextAreaFor(model => model.Message, new { @class = "form-control post-row-height-equal", rows = 5, placeholder = "fill message here..." })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SelectedCategories)
+                    @Html.ListBoxFor(model => model.SelectedCategories, new MultiSelectList(Model.Categories, "Id", "Symbol"), new { @class = "form-control post-row-height-equal" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success btn-send">Send message</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-muted"><strong>*</strong> These fields are required.</p>
+            </div>
+        </div>
+
+    </div>
+}
