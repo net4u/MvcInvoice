@@ -15,6 +15,9 @@ namespace Invoice.Site.App_Start
     using AutoMapper;
     using Invoice.Site.Helpers;
     using Invoice.Definitions.Interfaces;
+    using Ninject.Modules;
+    using Ninject.Extensions.Logging.Log4net;
+    using Ninject.Extensions.Logging;
 
     public static class NinjectWebCommon 
     {
@@ -44,6 +47,10 @@ namespace Invoice.Site.App_Start
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
+            log4net.Config.XmlConfigurator.Configure();
+            var settings = new NinjectSettings { LoadExtensions = false };
+
+            //var kernel = new StandardKernel(settings, new INinjectModule[] { new Log4NetModule() });
             var kernel = new StandardKernel();
             try
             {

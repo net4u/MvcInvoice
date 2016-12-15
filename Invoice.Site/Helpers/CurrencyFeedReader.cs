@@ -1,5 +1,6 @@
 ﻿using Invoice.Definitions.Interfaces;
 using Invoice.Site.Models.Currency;
+using Ninject.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,13 @@ namespace Invoice.Site.Helpers
 {
     public class CurrencyFeedReader : ICurrencyFeedReader
     {
+        private ILogger _logger;
+
+        public CurrencyFeedReader(ILogger logger)
+        {
+            _logger = logger;
+        }
+
         public IEnumerable<ICurrencyData> GetFeeds(string address)
         {
             if (string.IsNullOrEmpty(address))
@@ -39,8 +47,9 @@ namespace Invoice.Site.Helpers
                 dynamic json = Json.Decode(response);
                 return ProcessResponse(json);
             }
-            catch
+            catch (Exception e)
             {
+                _logger.Error(e.Message);
                 return null;
             }
         }
@@ -55,9 +64,6 @@ namespace Invoice.Site.Helpers
             try
             {
                 var response = await RequestData(address);
-
-                
-
                 if (string.IsNullOrEmpty(response))
                 {
                     return null;
@@ -66,8 +72,9 @@ namespace Invoice.Site.Helpers
                 dynamic json = Json.Decode(response);
                 return ProcessResponse(json);
             }
-            catch
+            catch (Exception e)
             {
+                _logger.Error(e.Message);
                 return null;
             }
         }

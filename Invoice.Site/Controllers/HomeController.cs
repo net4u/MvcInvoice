@@ -14,6 +14,7 @@ using AutoMapper;
 using Invoice.Database;
 using System.Data.Entity;
 using Invoice.Site.Attributes;
+using Ninject.Extensions.Logging;
 
 namespace Invoice.Site.Controllers
 {
@@ -21,11 +22,13 @@ namespace Invoice.Site.Controllers
     {
         private IUnitOfWork _unitOfWork;
         private IMapper _mapper;
+        private ILogger _logger;
 
-        public HomeController(IUnitOfWork unitOfWork, IMapper mapper)
+        public HomeController(IUnitOfWork unitOfWork, IMapper mapper, ILogger logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public virtual ActionResult Index()
@@ -79,6 +82,7 @@ namespace Invoice.Site.Controllers
             }
             catch (Exception e)
             {
+                _logger.Error(e.Message);
                 return Json(new { success = false, errors = string.Format("Unhandled exception on server side: {0}", e.Message) });
             }
 
