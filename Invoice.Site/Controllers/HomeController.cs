@@ -55,6 +55,7 @@ namespace Invoice.Site.Controllers
         }
 
         [HttpPost]
+        [AjaxOnly]
         public virtual ActionResult Create(PostEditModel post)
         {
             if (!ModelState.IsValid)
@@ -78,7 +79,7 @@ namespace Invoice.Site.Controllers
                 var model = _mapper.Map<PostViewModel>(dbPost);
                 model.Categories = _mapper.Map<List<PostCategoryViewModel>>(categories);
 
-                return Json(new { success = true, post = model });
+                return Json(new { success = true, data = model });
             }
             catch (Exception e)
             {
@@ -99,7 +100,7 @@ namespace Invoice.Site.Controllers
                                      .Take(pageSize)
                                      .ToList<Post>();
             var models = _mapper.Map<List<PostViewModel>>(dbPosts);
-            return Json(models, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, data = models }, JsonRequestBehavior.AllowGet);
         }
     }
 }

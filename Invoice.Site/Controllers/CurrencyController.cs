@@ -11,10 +11,11 @@ using Invoice.Definitions.Interfaces;
 using System.Threading.Tasks;
 using Ninject.Extensions.Logging;
 using Invoice.Site.Attributes;
+using System.IO;
 
 namespace Invoice.Site.Controllers
 {
-    public partial class CurrencyController : Controller
+    public partial class CurrencyController : BaseController
     {
         private IUnitOfWork _unitOfWork;
         private ICurrencyFeedReader _reader;
@@ -30,28 +31,37 @@ namespace Invoice.Site.Controllers
         [AjaxOnly]
         public virtual async Task<ActionResult> Index()
         {
+            string errorMsg = string.Empty;
+
             try
             {
                 ParameterGlobal parameter = _unitOfWork.ParameterGlobalRepository
                                                        .SingleOrDefault(e => e.KeyName == Consts.Param.BANK_CURRENCY_EXCHANGE_URL);
                 if (parameter == null || string.IsNullOrEmpty(parameter.Value))
                 {
-                    return null;
+                   errorMsg = "No parameter for currency list defined";
+                   _logger.Error(errorMsg);
+                   Json(new { success = false, errors = errorMsg });
                 }
 
                 var currencyList = _reader.Feeds(parameter.Value);
                 if (currencyList == null)
                 {
-                    return null;
+                    errorMsg = "No currencies found";
+                    _logger.Error(errorMsg);
+                    Json(new { success = false, errors = errorMsg });
                 }
 
-                return PartialView(await currencyList);
+                //return PartialView(await currencyList);
+                return Json(new {success = true, data = RenderPartialViewToString(T4MVC_CurrencyController.s_views.ViewNames.Index, await currencyList)}, 
+                    JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
                 _logger.Error(e.Message);
-                return null;
+                return Json(new { success = false, errors = e.Message });
             }
         }
+
     }
 }

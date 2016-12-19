@@ -28,6 +28,7 @@ using T4MVC;
 public static partial class MVC
 {
     public static Invoice.Site.Controllers.AccountController Account = new Invoice.Site.Controllers.T4MVC_AccountController();
+    public static Invoice.Site.Controllers.BaseController Base = new Invoice.Site.Controllers.T4MVC_BaseController();
     public static Invoice.Site.Controllers.CompanyController Company = new Invoice.Site.Controllers.T4MVC_CompanyController();
     public static Invoice.Site.Controllers.CurrencyController Currency = new Invoice.Site.Controllers.T4MVC_CurrencyController();
     public static Invoice.Site.Controllers.HomeController Home = new Invoice.Site.Controllers.T4MVC_HomeController();

@@ -40,30 +40,31 @@ $(function () {
             cache: false,
             contentType: false,
             processData: false,
-            success: function (data) {
-                if ((data != null) && (data.success) && (data.post != null)) {
+            success: function (response) {
+                if ((response != null) && (response.success) && (response.data != null)) {
                     $("#post-ajax-error-placeholder").html(bsMSG("post has been saved correctly", 'success', false, true));
                     $('#form-post').trigger("reset");
-                    $("#content-container").prepend(CreatePostView(data.post));
+                    $("#content-container").prepend(CreatePostView(response.data));
                 }
                 else {
                     var errors
-                    if ((data == null) || (data.post == null)){
+                    if ((response == null) || (response.data == null)) {
                         errors = "unhandled exception";
                     }
                     else {
                         errors = [];
                         errors.push(("error in:"));
-                        for (var err in data.errors) {
-                            errors.push(data.errors[err]);
+                        for (var err in response.errors) {
+                            errors.push(response.errors[err]);
                         }
                     }
                     $("#post-ajax-error-placeholder").html(bsMSG(errors, 'danger', false, true));
                 }
                 $("#post-ajax-error-placeholder").show();
             },
-            error: function (data) {
-                alert('failed ' + data);
+            error: function () {
+                $("#post-ajax-error-placeholder").html(bsMSG('unhandled error while creating post', 'danger', false, true));
+                $("#post-ajax-error-placeholder").show();
             }
         });
     });
@@ -85,11 +86,11 @@ function GetPosts() {
         url: '/home/GetPosts',
         data: { "pageindex": pageIndex, "pagesize": pageSize },
         datatype: 'json',
-        success: function (data) {
-            if (data != null) {
+        success: function (response) {
+            if ((response != null) && (response.data != null)) {
                 var className = "";
-                for (var i = 0; i < data.length; i++) {
-                    $("#content-container").append(CreatePostView(data[i]));
+                for (var i = 0; i < response.data.length; i++) {
+                    $("#content-container").append(CreatePostView(response.data[i]));
                 }
                 pageIndex++;
             }
@@ -172,5 +173,3 @@ function GetFileExtension(fileName) {
     }
     return null;
 }
-
-//$("#content-container").append("<h2>" + data[i].Header + "<h2>");

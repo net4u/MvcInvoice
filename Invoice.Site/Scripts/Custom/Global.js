@@ -30,10 +30,10 @@ function LoadCurrencyTracker() {
     $.ajax({
         type: 'GET',
         url: '/Currency/Index',
-        success: function (data) {
-            if (data != null) {
-               
-                $("#currenny-tracker-placeholder").html(data);
+        datatype: 'json',
+        success: function (response) {
+            if ((response != null) && (response.success)) {
+                $("#currenny-tracker-placeholder").html(response.data);
             }
             else {
                 $("#currenny-tracker-placeholder").hide();

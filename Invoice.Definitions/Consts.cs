@@ -30,5 +30,13 @@ namespace Invoice.Definitions
             public const string FILE_VALID_TYPES = "validtypes";
             public const string FILE_MAX_LENGTH = "maxlength";
         }
+
+        public static class MvcPattern
+        {
+            public const string MODEL = "model";
+            public const string VIEW = "view";
+            public const string CONTROLLER = "controller";
+            public const string ACTION = "action";
+        }
     }
 }
