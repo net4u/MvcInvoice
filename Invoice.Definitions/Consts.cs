@@ -38,5 +38,10 @@ namespace Invoice.Definitions
             public const string CONTROLLER = "controller";
             public const string ACTION = "action";
         }
+
+        public static class ErrorViewName
+        {
+            public const string Error = "Error";
+        }
     }
 }

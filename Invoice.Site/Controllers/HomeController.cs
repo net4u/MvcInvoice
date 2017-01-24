@@ -18,6 +18,7 @@ using Ninject.Extensions.Logging;
 
 namespace Invoice.Site.Controllers
 {
+    [LogError(View = Consts.ErrorViewName.Error)]
     public partial class HomeController : Controller
     {
         private IUnitOfWork _unitOfWork;
@@ -63,8 +64,6 @@ namespace Invoice.Site.Controllers
                 return Json(new { success = false, errors = ModelState.Where(e => e.Value.Errors.Count > 0).Select(a => a.Key) });
             }
 
-            try
-            {
                 var dbPost = _mapper.Map<Post>(post);
                 var categories = _unitOfWork.PostCategorySdicRepository.GetAll();
                 foreach (var id in post.SelectedCategories)
@@ -80,12 +79,6 @@ namespace Invoice.Site.Controllers
                 model.Categories = _mapper.Map<List<PostCategoryViewModel>>(categories);
 
                 return Json(new { success = true, data = model });
-            }
-            catch (Exception e)
-            {
-                _logger.Error(e.Message);
-                return Json(new { success = false, errors = string.Format("Unhandled exception on server side: {0}", e.Message) });
-            }
 
         }
 

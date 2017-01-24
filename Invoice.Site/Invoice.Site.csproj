@@ -213,6 +213,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Attributes\AjaxOnlyAttribute.cs" />
+    <Compile Include="Attributes\LogErrorAttribute.cs" />
     <Compile Include="Attributes\MaxFileLengthAttribute.cs" />
     <Compile Include="Attributes\ValidateFileTypeAttribute.cs" />
     <Compile Include="BaseController.generated.cs">

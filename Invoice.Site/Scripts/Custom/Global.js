@@ -12,7 +12,6 @@
     if (typeof bClose == 'boolean') {
         bClose ? html = "<div class='alert alert-" + type + "'><a href=' ' class='close' data-dismiss='alert' aria-label='close';>&times;</a>" + html + "</div>" : html;
     }
-    //html = "<div class='alert alert-" + type + "'>" + html + "</div>";
 
     return html;
 }
@@ -34,6 +33,9 @@ function LoadCurrencyTracker() {
         success: function (response) {
             if ((response != null) && (response.success)) {
                 $("#currenny-tracker-placeholder").html(response.data);
+                $("#curr-stop").click(function () {
+                    $("#curr-list").toggleClass("animation-paused");
+                });
             }
             else {
                 $("#currenny-tracker-placeholder").hide();
@@ -47,4 +49,5 @@ function LoadCurrencyTracker() {
         }
 
     });
+
 }
