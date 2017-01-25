@@ -2,6 +2,8 @@
 
 @using (Html.BeginForm(MVC.Home.ActionNames.Create, MVC.Home.Name, FormMethod.Post, new { enctype = "multipart/form-data", id = "form-post" }))
 {
+    @Html.AntiForgeryToken()
+
     <div class="ErrorMessage">
         @Html.ValidationSummary(false)
     </div>

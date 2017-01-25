@@ -31,7 +31,9 @@ $(function () {
             .find("ul").empty();
 
         e.preventDefault();
+        var token = $("[name='__RequestVerificationToken']").val();
         var formData = new FormData(this);
+        formData.append("__RequestVerificationToken", token);
 
         $.ajax({
             type: 'POST',

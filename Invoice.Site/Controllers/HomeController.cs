@@ -57,6 +57,7 @@ namespace Invoice.Site.Controllers
 
         [HttpPost]
         [AjaxOnly]
+        [ValidateAntiForgeryToken]
         public virtual ActionResult Create(PostEditModel post)
         {
             if (!ModelState.IsValid)
