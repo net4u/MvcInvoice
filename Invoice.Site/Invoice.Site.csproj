@@ -352,6 +352,7 @@
     <Content Include="Views\Currency\Index.cshtml" />
     <Content Include="Views\Home\Commercial.cshtml" />
     <Content Include="Views\Home\Post.cshtml" />
+    <Content Include="Views\Account\LoginModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

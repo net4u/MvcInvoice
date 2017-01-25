@@ -54,6 +54,21 @@ a.inactive {
     }
 
 /*
+    Login modal
+*/
+
+.login-modal-header {
+     background-color: blueviolet;
+      color:white !important;
+      text-align: center;
+      font-size: 2em;
+}
+
+.login-modal-footer {
+    background-color: blueviolet;
+}
+
+/*
     Currency moving panel
 */
 

@@ -268,6 +268,7 @@ namespace Invoice.Site.Controllers
                 public readonly string ForgotPassword = "ForgotPassword";
                 public readonly string ForgotPasswordConfirmation = "ForgotPasswordConfirmation";
                 public readonly string Login = "Login";
+                public readonly string LoginModal = "LoginModal";
                 public readonly string Register = "Register";
                 public readonly string ResetPassword = "ResetPassword";
                 public readonly string ResetPasswordConfirmation = "ResetPasswordConfirmation";
@@ -281,6 +282,7 @@ namespace Invoice.Site.Controllers
             public readonly string ForgotPassword = "~/Views/Account/ForgotPassword.cshtml";
             public readonly string ForgotPasswordConfirmation = "~/Views/Account/ForgotPasswordConfirmation.cshtml";
             public readonly string Login = "~/Views/Account/Login.cshtml";
+            public readonly string LoginModal = "~/Views/Account/LoginModal.cshtml";
             public readonly string Register = "~/Views/Account/Register.cshtml";
             public readonly string ResetPassword = "~/Views/Account/ResetPassword.cshtml";
             public readonly string ResetPasswordConfirmation = "~/Views/Account/ResetPasswordConfirmation.cshtml";

@@ -22,9 +22,22 @@
             @Html.Partial(MVC.Toolbar.Views.Toolbar, Invoice.Site.Helpers.ToolbarHelper.GetToolbarMenuModel())
         </div>
     </div>
+    @*for login modal*@
+   @*<div id="login-modal-placeholder" tabindex="-1" class="modal fade" role="dialog" style="border: 5px solid #0094ff">
+    <a href="#close" title="Close" class="modal-close-btn">X</a>
+       <div class="modal-content" style="width:500px !important; margin: 10px auto !important;">
+           <div class="modal-body">
+           </div>
+       </div>
+   </div>*@
+
+
     <div id="currenny-tracker-placeholder" class="container">
      @*for ajax fill*@
     </div>
+
+    @Html.Partial(MVC.Account.Views.LoginModal, new Invoice.Site.Models.LoginViewModel())
+
     <div id="view-placeholder" class="container body-content">
         @RenderBody()
         <hr />
