@@ -45,8 +45,6 @@ namespace Invoice.Database
         public int InvoiceContractorsDataId { get; set; }
         public string DataSearch { get; set; }
     
-        public virtual Company Company { get; set; }
-        public virtual Currency_SDIC Currency_SDIC { get; set; }
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FileAttachment> FileAttachment { get; set; }
@@ -55,5 +53,7 @@ namespace Invoice.Database
         public virtual ICollection<InvoicePosition> InvoicePosition { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Summary> Summary { get; set; }
+        public virtual Currency_SDIC Currency_SDIC { get; set; }
+        public virtual Company Company { get; set; }
     }
 }

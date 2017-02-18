@@ -88,6 +88,7 @@
     <Compile Include="Customer.cs">
       <DependentUpon>InvoiceModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\BankAccount.cs" />
     <Compile Include="Entities\ParameterGlobal.cs" />
     <Compile Include="FileAttachment.cs">
       <DependentUpon>InvoiceModel.tt</DependentUpon>

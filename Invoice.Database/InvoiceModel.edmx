@@ -90,8 +90,8 @@
           <Property Name="Description" Type="nvarchar" MaxLength="255" />
           <Property Name="Symbol" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="255" />
-          <Property Name="BankAccountId" Type="int" />
-          <Property Name="AddressId" Type="int" />
+          <Property Name="BankAccountId" Type="int" Nullable="false" />
+          <Property Name="AddressId" Type="int" Nullable="false" />
           <Property Name="DataSearch" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Country_SDIC">
@@ -299,7 +299,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Company_Address">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="1" />
           <End Role="Company" Type="Self.Company" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Address">
@@ -311,7 +311,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Company_BankAccount">
-          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="0..1" />
+          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="1" />
           <End Role="Company" Type="Self.Company" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BankAccount">
@@ -692,40 +692,8 @@
           <Property Name="PostCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CountryId" Type="Int32" Nullable="false" />
           <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_Company_Address" FromRole="Address" ToRole="Company" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_Address" FromRole="Address" ToRole="Customer" />
-        </EntityType>
-        <EntityType Name="BankAccount">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BankName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Number" Type="String" MaxLength="26" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CurrencyId" Type="Int32" Nullable="false" />
-          <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Currency_SDIC" Relationship="Self.FK_BankAccount_Currency_SDIC" FromRole="BankAccount" ToRole="Currency_SDIC" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_Company_BankAccount" FromRole="BankAccount" ToRole="Company" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_BankAccount" FromRole="BankAccount" ToRole="Customer" />
-        </EntityType>
-        <EntityType Name="Company">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Nip" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Regon" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Symbol" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="BankAccountId" Type="Int32" />
-          <Property Name="AddressId" Type="Int32" />
-          <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Address" Relationship="Self.FK_Company_Address" FromRole="Company" ToRole="Address" />
-          <NavigationProperty Name="BankAccount" Relationship="Self.FK_Company_BankAccount" FromRole="Company" ToRole="BankAccount" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_Company" FromRole="Company" ToRole="Customer" />
-          <NavigationProperty Name="Invoice" Relationship="MvcInvoiceDbModel.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
+          <NavigationProperty Name="Company" Relationship="MvcInvoiceDbModel.FK_Company_Address" FromRole="Address" ToRole="Company" />
         </EntityType>
         <EntityType Name="Country_SDIC">
           <Key>
@@ -735,18 +703,6 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Symbol" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="OrderNumber" Type="Int32" Nullable="false" />
-          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Currency_SDIC">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Symbol" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="OrderNumber" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BankAccount" Relationship="Self.FK_BankAccount_Currency_SDIC" FromRole="Currency_SDIC" ToRole="BankAccount" />
-          <NavigationProperty Name="Invoice" Relationship="MvcInvoiceDbModel.FK_Invoice_Currency_SDIC" FromRole="Currency_SDIC" ToRole="Invoice" />
           <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Customer">
@@ -763,9 +719,9 @@
           <Property Name="AddressId" Type="Int32" />
           <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Address" Relationship="Self.FK_Customer_Address" FromRole="Customer" ToRole="Address" />
-          <NavigationProperty Name="BankAccount" Relationship="Self.FK_Customer_BankAccount" FromRole="Customer" ToRole="BankAccount" />
-          <NavigationProperty Name="Company" Relationship="Self.FK_Customer_Company" FromRole="Customer" ToRole="Company" />
           <NavigationProperty Name="Invoice" Relationship="MvcInvoiceDbModel.FK_Invoice_Customer" FromRole="Customer" ToRole="Invoice" />
+          <NavigationProperty Name="BankAccount" Relationship="MvcInvoiceDbModel.FK_Customer_BankAccount" FromRole="Customer" ToRole="BankAccount" />
+          <NavigationProperty Name="Company" Relationship="MvcInvoiceDbModel.FK_Customer_Company" FromRole="Customer" ToRole="Company" />
         </EntityType>
         <EntityType Name="FileAttachment">
           <Key>
@@ -824,18 +780,6 @@
           <Property Name="OrderNumber" Type="Int32" Nullable="false" />
           <NavigationProperty Name="InvoicePosition" Relationship="Self.FK_InvoicePosition_TaxRate" FromRole="TaxRate" ToRole="InvoicePosition" />
         </EntityType>
-        <Association Name="FK_Company_Address">
-          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
-          <End Role="Company" Type="Self.Company" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Company">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Customer_Address">
           <End Role="Address" Type="Self.Address" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -847,56 +791,6 @@
             </Principal>
             <Dependent Role="Customer">
               <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BankAccount_Currency_SDIC">
-          <End Role="Currency_SDIC" Type="Self.Currency_SDIC" Multiplicity="1" />
-          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Currency_SDIC">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BankAccount">
-              <PropertyRef Name="CurrencyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Company_BankAccount">
-          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="0..1" />
-          <End Role="Company" Type="Self.Company" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BankAccount">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Company">
-              <PropertyRef Name="BankAccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customer_BankAccount">
-          <End Role="BankAccount" Type="Self.BankAccount" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BankAccount">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="BankAccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customer_Company">
-          <End Role="Company" Type="Self.Company" Multiplicity="1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -914,37 +808,14 @@
         </Association>
         <EntityContainer Name="MvcInvoiceDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Address" EntityType="Self.Address" />
-          <EntitySet Name="BankAccount" EntityType="Self.BankAccount" />
-          <EntitySet Name="Company" EntityType="Self.Company" />
           <EntitySet Name="Country_SDIC" EntityType="Self.Country_SDIC" />
-          <EntitySet Name="Currency_SDIC" EntityType="Self.Currency_SDIC" />
           <EntitySet Name="Customer" EntityType="Self.Customer" />
           <EntitySet Name="FileAttachment" EntityType="Self.FileAttachment" />
           <EntitySet Name="InvoiceContractorsData" EntityType="Self.InvoiceContractorsData" />
           <EntitySet Name="InvoicePosition" EntityType="Self.InvoicePosition" />
           <EntitySet Name="TaxRate" EntityType="Self.TaxRate" />
-          <AssociationSet Name="FK_Company_Address" Association="Self.FK_Company_Address">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="Company" EntitySet="Company" />
-          </AssociationSet>
           <AssociationSet Name="FK_Customer_Address" Association="Self.FK_Customer_Address">
             <End Role="Address" EntitySet="Address" />
-            <End Role="Customer" EntitySet="Customer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BankAccount_Currency_SDIC" Association="Self.FK_BankAccount_Currency_SDIC">
-            <End Role="Currency_SDIC" EntitySet="Currency_SDIC" />
-            <End Role="BankAccount" EntitySet="BankAccount" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Company_BankAccount" Association="Self.FK_Company_BankAccount">
-            <End Role="BankAccount" EntitySet="BankAccount" />
-            <End Role="Company" EntitySet="Company" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customer_BankAccount" Association="Self.FK_Customer_BankAccount">
-            <End Role="BankAccount" EntitySet="BankAccount" />
-            <End Role="Customer" EntitySet="Customer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customer_Company" Association="Self.FK_Customer_Company">
-            <End Role="Company" EntitySet="Company" />
             <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
           <AssociationSet Name="FK_InvoicePosition_TaxRate" Association="Self.FK_InvoicePosition_TaxRate">
@@ -969,14 +840,6 @@
           </AssociationSet>
           <EntitySet Name="Invoice" EntityType="MvcInvoiceDbModel.Invoice" />
           <EntitySet Name="Summary" EntityType="MvcInvoiceDbModel.Summary" />
-          <AssociationSet Name="FK_Invoice_Company" Association="MvcInvoiceDbModel.FK_Invoice_Company">
-            <End Role="Company" EntitySet="Company" />
-            <End Role="Invoice" EntitySet="Invoice" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Invoice_Currency_SDIC" Association="MvcInvoiceDbModel.FK_Invoice_Currency_SDIC">
-            <End Role="Currency_SDIC" EntitySet="Currency_SDIC" />
-            <End Role="Invoice" EntitySet="Invoice" />
-          </AssociationSet>
           <AssociationSet Name="FK_Invoice_Customer" Association="MvcInvoiceDbModel.FK_Invoice_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Invoice" EntitySet="Invoice" />
@@ -1009,6 +872,37 @@
           <AssociationSet Name="PostCategories" Association="MvcInvoiceDbModel.PostCategories">
             <End Role="Post" EntitySet="Post" />
             <End Role="PostCategory_SDIC" EntitySet="PostCategory_SDIC" />
+          </AssociationSet>
+          <EntitySet Name="BankAccount" EntityType="MvcInvoiceDbModel.BankAccount" />
+          <EntitySet Name="Currency_SDIC" EntityType="MvcInvoiceDbModel.Currency_SDIC" />
+          <AssociationSet Name="FK_BankAccount_Currency_SDIC" Association="MvcInvoiceDbModel.FK_BankAccount_Currency_SDIC">
+            <End Role="Currency_SDIC" EntitySet="Currency_SDIC" />
+            <End Role="BankAccount" EntitySet="BankAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_BankAccount" Association="MvcInvoiceDbModel.FK_Customer_BankAccount">
+            <End Role="BankAccount" EntitySet="BankAccount" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Currency_SDIC" Association="MvcInvoiceDbModel.FK_Invoice_Currency_SDIC">
+            <End Role="Currency_SDIC" EntitySet="Currency_SDIC" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <EntitySet Name="Company" EntityType="MvcInvoiceDbModel.Company" />
+          <AssociationSet Name="FK_Company_Address" Association="MvcInvoiceDbModel.FK_Company_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_BankAccount" Association="MvcInvoiceDbModel.FK_Company_BankAccount">
+            <End Role="BankAccount" EntitySet="BankAccount" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Company" Association="MvcInvoiceDbModel.FK_Customer_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Company" Association="MvcInvoiceDbModel.FK_Invoice_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Invoice" EntitySet="Invoice" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetRoles">
@@ -1118,13 +1012,13 @@
           <Property Name="CurrencyId" Type="Int32" />
           <Property Name="InvoiceContractorsDataId" Type="Int32" Nullable="false" />
           <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Company" Relationship="MvcInvoiceDbModel.FK_Invoice_Company" FromRole="Invoice" ToRole="Company" />
-          <NavigationProperty Name="Currency_SDIC" Relationship="MvcInvoiceDbModel.FK_Invoice_Currency_SDIC" FromRole="Invoice" ToRole="Currency_SDIC" />
           <NavigationProperty Name="Customer" Relationship="MvcInvoiceDbModel.FK_Invoice_Customer" FromRole="Invoice" ToRole="Customer" />
           <NavigationProperty Name="FileAttachment" Relationship="MvcInvoiceDbModel.FK_FileAttachment_Invoice" FromRole="Invoice" ToRole="FileAttachment" />
           <NavigationProperty Name="InvoiceContractorsData" Relationship="MvcInvoiceDbModel.FK_Invoice_InvoiceContractorsData" FromRole="Invoice" ToRole="InvoiceContractorsData" />
           <NavigationProperty Name="InvoicePosition" Relationship="MvcInvoiceDbModel.FK_InvoicePosition_Invoice" FromRole="Invoice" ToRole="InvoicePosition" />
           <NavigationProperty Name="Summary" Relationship="MvcInvoiceDbModel.SummaryInvoice" FromRole="Invoice" ToRole="Summary" />
+          <NavigationProperty Name="Currency_SDIC" Relationship="MvcInvoiceDbModel.FK_Invoice_Currency_SDIC" FromRole="Invoice" ToRole="Currency_SDIC" />
+          <NavigationProperty Name="Company" Relationship="MvcInvoiceDbModel.FK_Invoice_Company" FromRole="Invoice" ToRole="Company" />
         </EntityType>
         <EntityType Name="Summary">
           <Key>
@@ -1143,30 +1037,6 @@
           <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Invoice" Relationship="MvcInvoiceDbModel.SummaryInvoice" FromRole="Summary" ToRole="Invoice" />
         </EntityType>
-        <Association Name="FK_Invoice_Company">
-          <End Type="MvcInvoiceDbModel.Company" Role="Company" Multiplicity="1" />
-          <End Type="MvcInvoiceDbModel.Invoice" Role="Invoice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Company">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Invoice">
-              <PropertyRef Name="CompanyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Invoice_Currency_SDIC">
-          <End Type="MvcInvoiceDbModel.Currency_SDIC" Role="Currency_SDIC" Multiplicity="0..1" />
-          <End Type="MvcInvoiceDbModel.Invoice" Role="Invoice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Currency_SDIC">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Invoice">
-              <PropertyRef Name="CurrencyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Invoice_Customer">
           <End Type="MvcInvoiceDbModel.Customer" Role="Customer" Multiplicity="1" />
           <End Type="MvcInvoiceDbModel.Invoice" Role="Invoice" Multiplicity="*" />
@@ -1286,6 +1156,136 @@
           <End Type="MvcInvoiceDbModel.Post" Role="Post" Multiplicity="*" />
           <End Type="MvcInvoiceDbModel.PostCategory_SDIC" Role="PostCategory_SDIC" Multiplicity="*" />
         </Association>
+        <EntityType Name="BankAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="26" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+          <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Currency_SDIC" Relationship="MvcInvoiceDbModel.FK_BankAccount_Currency_SDIC" FromRole="BankAccount" ToRole="Currency_SDIC" />
+          <NavigationProperty Name="Customer" Relationship="MvcInvoiceDbModel.FK_Customer_BankAccount" FromRole="BankAccount" ToRole="Customer" />
+          <NavigationProperty Name="Company" Relationship="MvcInvoiceDbModel.FK_Company_BankAccount" FromRole="BankAccount" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Currency_SDIC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNumber" Type="Int32" Nullable="false" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BankAccount" Relationship="MvcInvoiceDbModel.FK_BankAccount_Currency_SDIC" FromRole="Currency_SDIC" ToRole="BankAccount" />
+          <NavigationProperty Name="Invoice" Relationship="MvcInvoiceDbModel.FK_Invoice_Currency_SDIC" FromRole="Currency_SDIC" ToRole="Invoice" />
+        </EntityType>
+        <Association Name="FK_BankAccount_Currency_SDIC">
+          <End Type="MvcInvoiceDbModel.Currency_SDIC" Role="Currency_SDIC" Multiplicity="1" />
+          <End Type="MvcInvoiceDbModel.BankAccount" Role="BankAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency_SDIC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BankAccount">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_BankAccount">
+          <End Type="MvcInvoiceDbModel.BankAccount" Role="BankAccount" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MvcInvoiceDbModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="BankAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Currency_SDIC">
+          <End Type="MvcInvoiceDbModel.Currency_SDIC" Role="Currency_SDIC" Multiplicity="0..1" />
+          <End Type="MvcInvoiceDbModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency_SDIC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Nip" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Regon" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BankAccountId" Type="Int32" Nullable="false" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="DataSearch" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Address" Relationship="MvcInvoiceDbModel.FK_Company_Address" FromRole="Company" ToRole="Address" />
+          <NavigationProperty Name="BankAccount" Relationship="MvcInvoiceDbModel.FK_Company_BankAccount" FromRole="Company" ToRole="BankAccount" />
+          <NavigationProperty Name="Customer" Relationship="MvcInvoiceDbModel.FK_Customer_Company" FromRole="Company" ToRole="Customer" />
+          <NavigationProperty Name="Invoice" Relationship="MvcInvoiceDbModel.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
+        </EntityType>
+        <Association Name="FK_Company_Address">
+          <End Type="MvcInvoiceDbModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="MvcInvoiceDbModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_BankAccount">
+          <End Type="MvcInvoiceDbModel.BankAccount" Role="BankAccount" Multiplicity="1" />
+          <End Type="MvcInvoiceDbModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="BankAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Company">
+          <End Type="MvcInvoiceDbModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="MvcInvoiceDbModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Company">
+          <End Type="MvcInvoiceDbModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="MvcInvoiceDbModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1306,47 +1306,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BankAccount">
-            <EntityTypeMapping TypeName="MvcInvoiceDbModel.BankAccount">
-              <MappingFragment StoreEntitySet="BankAccount">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="BankName" ColumnName="BankName" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
-                <ScalarProperty Name="DataSearch" ColumnName="DataSearch" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Company">
-            <EntityTypeMapping TypeName="MvcInvoiceDbModel.Company">
-              <MappingFragment StoreEntitySet="Company">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Nip" ColumnName="Nip" />
-                <ScalarProperty Name="Regon" ColumnName="Regon" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="BankAccountId" ColumnName="BankAccountId" />
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-                <ScalarProperty Name="DataSearch" ColumnName="DataSearch" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Country_SDIC">
             <EntityTypeMapping TypeName="MvcInvoiceDbModel.Country_SDIC">
               <MappingFragment StoreEntitySet="Country_SDIC">
-                <ScalarProperty Name="Language" ColumnName="Language" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
-                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Currency_SDIC">
-            <EntityTypeMapping TypeName="MvcInvoiceDbModel.Currency_SDIC">
-              <MappingFragment StoreEntitySet="Currency_SDIC">
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1592,6 +1554,44 @@
               <ScalarProperty Name="Id" ColumnName="PostId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="BankAccount">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.BankAccount">
+              <MappingFragment StoreEntitySet="BankAccount">
+                <ScalarProperty Name="DataSearch" ColumnName="DataSearch" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currency_SDIC">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.Currency_SDIC">
+              <MappingFragment StoreEntitySet="Currency_SDIC">
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Company">
+            <EntityTypeMapping TypeName="MvcInvoiceDbModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="DataSearch" ColumnName="DataSearch" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="BankAccountId" ColumnName="BankAccountId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Regon" ColumnName="Regon" />
+                <ScalarProperty Name="Nip" ColumnName="Nip" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

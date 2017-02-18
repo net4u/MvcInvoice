@@ -58,6 +58,12 @@ namespace Invoice.Site.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Search()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Search);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult Details()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Details);
@@ -91,6 +97,7 @@ namespace Invoice.Site.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string Search = "Search";
             public readonly string Details = "Details";
             public readonly string Create = "Create";
             public readonly string Edit = "Edit";
@@ -101,6 +108,7 @@ namespace Invoice.Site.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string Search = "Search";
             public const string Details = "Details";
             public const string Create = "Create";
             public const string Edit = "Edit";
@@ -108,6 +116,14 @@ namespace Invoice.Site.Controllers
         }
 
 
+        static readonly ActionParamsClass_Search s_params_Search = new ActionParamsClass_Search();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Search SearchParams { get { return s_params_Search; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Search
+        {
+            public readonly string searchCriteria = "searchCriteria";
+        }
         static readonly ActionParamsClass_Details s_params_Details = new ActionParamsClass_Details();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Details DetailsParams { get { return s_params_Details; } }
@@ -152,7 +168,15 @@ namespace Invoice.Site.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _Company = "_Company";
+                public readonly string _CompanySearch = "_CompanySearch";
+                public readonly string Create = "Create";
+                public readonly string Index = "Index";
             }
+            public readonly string _Company = "~/Views/Company/_Company.cshtml";
+            public readonly string _CompanySearch = "~/Views/Company/_CompanySearch.cshtml";
+            public readonly string Create = "~/Views/Company/Create.cshtml";
+            public readonly string Index = "~/Views/Company/Index.cshtml";
         }
     }
 
@@ -169,6 +193,18 @@ namespace Invoice.Site.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SearchOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Invoice.Site.Models.Company.CompanySearchViewModel searchCriteria);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Search(Invoice.Site.Models.Company.CompanySearchViewModel searchCriteria)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Search);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "searchCriteria", searchCriteria);
+            SearchOverride(callInfo, searchCriteria);
             return callInfo;
         }
 

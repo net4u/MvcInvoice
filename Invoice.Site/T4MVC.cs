@@ -33,6 +33,8 @@ public static partial class MVC
     public static Invoice.Site.Controllers.CurrencyController Currency = new Invoice.Site.Controllers.T4MVC_CurrencyController();
     public static Invoice.Site.Controllers.HomeController Home = new Invoice.Site.Controllers.T4MVC_HomeController();
     public static Invoice.Site.Controllers.ManageController Manage = new Invoice.Site.Controllers.T4MVC_ManageController();
+    public static T4MVC.AddressController Address = new T4MVC.AddressController();
+    public static T4MVC.BankAccountController BankAccount = new T4MVC.BankAccountController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
     public static T4MVC.ToolbarController Toolbar = new T4MVC.ToolbarController();
 }
@@ -97,6 +99,7 @@ namespace Links
             private const string URLPATH = "~/Scripts/Custom";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string CompanyIndex_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/CompanyIndex.min.js") ? Url("CompanyIndex.min.js") : Url("CompanyIndex.js");
             public static readonly string CurrencyIndex_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/CurrencyIndex.min.js") ? Url("CurrencyIndex.min.js") : Url("CurrencyIndex.js");
             public static readonly string Global_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Global.min.js") ? Url("Global.min.js") : Url("Global.js");
             public static readonly string HomeIndex_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/HomeIndex.min.js") ? Url("HomeIndex.min.js") : Url("HomeIndex.js");
@@ -149,6 +152,7 @@ namespace Links
             {
                 public static class Assets
                 {
+                    public const string CompanyIndex_js = "~/Scripts/Custom/CompanyIndex.js"; 
                     public const string CurrencyIndex_js = "~/Scripts/Custom/CurrencyIndex.js"; 
                     public const string Global_js = "~/Scripts/Custom/Global.js"; 
                     public const string HomeIndex_js = "~/Scripts/Custom/HomeIndex.js"; 

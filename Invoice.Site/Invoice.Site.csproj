@@ -205,6 +205,9 @@
     <Compile Include="AccountController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="AddressController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -216,6 +219,9 @@
     <Compile Include="Attributes\LogErrorAttribute.cs" />
     <Compile Include="Attributes\MaxFileLengthAttribute.cs" />
     <Compile Include="Attributes\ValidateFileTypeAttribute.cs" />
+    <Compile Include="BankAccountController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="BaseController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -231,6 +237,7 @@
     <Compile Include="CurrencyController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -247,16 +254,24 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CompanyModel.cs" />
-    <Compile Include="Models\CompanyViewModel.cs" />
+    <Compile Include="Models\Address\AddressEditModel.cs" />
+    <Compile Include="Models\BankAccount\BankAccountEditModel.cs" />
+    <Compile Include="Models\Company\CompanyEditModel.cs" />
+    <Compile Include="Models\Company\CompanyModel.cs" />
+    <Compile Include="Models\Company\CompanySearchViewModel.cs" />
+    <Compile Include="Models\Company\CompanySearchResultViewModel.cs" />
+    <Compile Include="Models\Company\CompanyViewModel.cs" />
+    <Compile Include="Models\Country\CountryViewModel.cs" />
     <Compile Include="Models\Currency\CurrencyFeedModel.cs" />
+    <Compile Include="Models\Currency\CurrencyViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Post\PostCategorySdicModel.cs" />
+    <Compile Include="Models\Post\PostCategoryViewModel.cs" />
     <Compile Include="Models\Post\PostEditModel.cs" />
     <Compile Include="Models\Post\PostViewModel.cs" />
     <Compile Include="Models\RssChannelModel.cs" />
     <Compile Include="Models\RssSiteChannelModel.cs" />
+    <Compile Include="Models\SortByViewModel.cs" />
     <Compile Include="Models\Toolbar\ToolbarItem.cs" />
     <Compile Include="Models\Toolbar\ToolBarViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -288,6 +303,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Custom\CompanyIndex.js" />
     <Content Include="Scripts\Custom\CurrencyIndex.js" />
     <Content Include="Scripts\Custom\Global.js" />
     <Content Include="Scripts\Custom\HomeIndex.js" />
@@ -353,12 +369,15 @@
     <Content Include="Views\Home\Commercial.cshtml" />
     <Content Include="Views\Home\Post.cshtml" />
     <Content Include="Views\Account\LoginModal.cshtml" />
+    <Content Include="Views\Company\_CompanySearch.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Address\_Address.cshtml" />
+    <Content Include="Views\BankAccount\_BankAccount.cshtml" />
+    <Content Include="Views\Company\_Company.cshtml" />
+    <Content Include="Views\Company\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Models\Filter\" />
-    <Folder Include="Views\Company\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

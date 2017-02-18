@@ -30,7 +30,7 @@ namespace Invoice.Site
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
-                    "~/Scripts/Custom/*.js"));
+                    "~/Scripts/Custom/Global.js"));
         }
     }
 }

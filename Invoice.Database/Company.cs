@@ -28,8 +28,8 @@ namespace Invoice.Database
         public string Description { get; set; }
         public string Symbol { get; set; }
         public string Email { get; set; }
-        public Nullable<int> BankAccountId { get; set; }
-        public Nullable<int> AddressId { get; set; }
+        public int BankAccountId { get; set; }
+        public int AddressId { get; set; }
         public string DataSearch { get; set; }
     
         public virtual Address Address { get; set; }

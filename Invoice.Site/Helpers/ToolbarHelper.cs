@@ -13,9 +13,9 @@ namespace Invoice.Site.Helpers
             var toolbarModel = new ToolBarViewModel() { Name = "Home"};
             var toolbarItems = new List<ToolbarItem>();
             toolbarItems.Add(new ToolbarItem() { Name = "Home", Action = MVC.Home.ActionNames.Index, Controller = MVC.Home.Name });
+            toolbarItems.Add(new ToolbarItem() { Name = "Company", Action = MVC.Company.ActionNames.Index, Controller = MVC.Company.Name });
             toolbarItems.Add(new ToolbarItem() { Name = "About", Action = MVC.Home.ActionNames.About, Controller = MVC.Home.Name });
             toolbarItems.Add(new ToolbarItem() { Name = "Contact", Action = MVC.Home.ActionNames.Contact, Controller = MVC.Home.Name });
-            toolbarItems.Add(new ToolbarItem() { Name = "Currency", Action = MVC.Currency.ActionNames.Index, Controller = MVC.Currency.Name });
 
             var listedActions = new ToolbarItem() { Name = "List", DropDownItems = new List<ToolbarItem>() };
             listedActions.DropDownItems.Add(new ToolbarItem() 

@@ -14,7 +14,7 @@ namespace Invoice.Site.Models.Post
 
         [DisplayName("Header *")]
         [Required(ErrorMessage = "Header is required")]
-        [MaxLength(50, ErrorMessage="ZToo much characters, max: 50")]
+        [MaxLength(50, ErrorMessage="Too much characters, max: 50")]
         public string Header { get; set; }
 
         [DisplayName("Message *")]
@@ -35,6 +35,6 @@ namespace Invoice.Site.Models.Post
         [DisplayName("Categories *")]
         [Required(ErrorMessage = "Category is required")]
         public IEnumerable<int> SelectedCategories { get; set; }
-        //public List<PostCategoryViewModel> SelectedCategories { get; set; }
+
     }
 }

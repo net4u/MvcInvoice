@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace Invoice.Definitions
 {
-    class Enums
+    public static class Enums
     {
+        public enum SortOrder
+        {
+            Ascending = 100,
+            Descending = 200
+        }
+
+        public enum CompanySortBy
+        {
+            Name = 100,
+            Symbol = 200,
+            Nip = 300,
+            Regon = 400
+        }
     }
 }

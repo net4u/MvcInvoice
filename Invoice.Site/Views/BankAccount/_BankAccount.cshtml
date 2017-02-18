@@ -1,0 +1,28 @@
+﻿@model Invoice.Site.Models.BankAccount.BankAccountEditModel
+<div class="controls">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Number)
+                @Html.TextBoxFor(model => model.Number, new { @class = "form-control", placeholder = "fill number here..." })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.BankName)
+                @Html.TextBoxFor(model => model.BankName, new { @class = "form-control", placeholder = "fill bank name here..." })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SelectedCurrencyId)
+                @Html.DropDownListFor(model => model.SelectedCurrencyId, new SelectList(Model.Currencies, "Id", "Symbol"),
+                    new { @class = "form-control"})
+            </div>
+        </div>
+    </div>
+</div>

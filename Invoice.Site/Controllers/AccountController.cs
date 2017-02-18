@@ -9,10 +9,13 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Invoice.Site.Models;
+using Invoice.Site.Attributes;
+using Invoice.Definitions;
 
 namespace Invoice.Site.Controllers
 {
     [Authorize]
+    [LogError(View = Consts.ErrorViewName.Error)]
     public partial class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

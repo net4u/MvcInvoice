@@ -31,9 +31,10 @@ $(function () {
             .find("ul").empty();
 
         e.preventDefault();
-        var token = $("[name='__RequestVerificationToken']").val();
+        //var token = $("[name='__RequestVerificationToken']").val();
+        var token = $(this).find("[name='__RequestVerificationToken']").eq(0).val()
         var formData = new FormData(this);
-        formData.append("__RequestVerificationToken", token);
+        //formData.append("__RequestVerificationToken", token);
 
         $.ajax({
             type: 'POST',
@@ -42,6 +43,9 @@ $(function () {
             cache: false,
             contentType: false,
             processData: false,
+            headers: {
+                '__RequestVerificationToken': token
+            }, 
             success: function (response) {
                 if ((response != null) && (response.success) && (response.data != null)) {
                     $("#post-ajax-error-placeholder").html(bsMSG("post has been saved correctly", 'success', false, true));

@@ -26,10 +26,7 @@ namespace Invoice.Database
         }
     
         public virtual DbSet<Address> Address { get; set; }
-        public virtual DbSet<BankAccount> BankAccount { get; set; }
-        public virtual DbSet<Company> Company { get; set; }
         public virtual DbSet<Country_SDIC> Country_SDIC { get; set; }
-        public virtual DbSet<Currency_SDIC> Currency_SDIC { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<FileAttachment> FileAttachment { get; set; }
         public virtual DbSet<InvoiceContractorsData> InvoiceContractorsData { get; set; }
@@ -46,5 +43,8 @@ namespace Invoice.Database
         public virtual DbSet<ParameterGlobal> ParameterGlobal { get; set; }
         public virtual DbSet<Post> Post { get; set; }
         public virtual DbSet<PostCategory_SDIC> PostCategory_SDIC { get; set; }
+        public virtual DbSet<BankAccount> BankAccount { get; set; }
+        public virtual DbSet<Currency_SDIC> Currency_SDIC { get; set; }
+        public virtual DbSet<Company> Company { get; set; }
     }
 }

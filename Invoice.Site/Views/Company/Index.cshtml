@@ -1,0 +1,18 @@
+﻿@model Invoice.Site.Models.Company.CompanySearchViewModel
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/Scripts/Custom/CompanyIndex.js")
+}
+
+<div class="row">
+    @Html.Partial(MVC.Company.Views._CompanySearch, Model)
+</div>
+
+<div id="content-container">
+</div>
+
+<div id="content-load-progress" class="ajax-page-loading">
+    <img id="ajax-loading-ico" src="~/Images/Loading.gif" alt="Loading..." class="img-responsive center-block img-center" />
+</div>

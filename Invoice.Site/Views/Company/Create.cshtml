@@ -1,0 +1,26 @@
+﻿@model Invoice.Site.Models.Company.CompanyEditModel
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (@Html.BeginForm(MVC.Company.ActionNames.Create, MVC.Company.Name))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="ErrorMessage">
+        @Html.ValidationSummary(false)
+    </div>
+
+    <div class="controls">
+        @Html.Partial(MVC.Company.Views._Company, Model)
+        @Html.Partial(MVC.BankAccount.Views._BankAccount, Model.Address)
+        @Html.Partial(MVC.Address.Views._Address, Model.Address)
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-success btn-send">Create</button>
+        </div>
+    </div>
+}
+

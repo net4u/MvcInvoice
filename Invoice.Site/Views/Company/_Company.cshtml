@@ -1,0 +1,51 @@
+﻿@model Invoice.Site.Models.Company.CompanyEditModel
+
+<div class="controls">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "fill name here..." })
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Symbol)
+                @Html.TextBoxFor(model => model.Symbol, new { @class = "form-control", placeholder = "fill symbol here..." })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nip)
+                @Html.TextBoxFor(model => model.Nip, new { @class = "form-control", placeholder = "fill nip here..." })
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Regon)
+                @Html.TextBoxFor(model => model.Regon, new { @class = "form-control", placeholder = "fill regon here..." })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email)
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "fill e-mail here..." })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description, 
+                    new { @class = "form-control", rows = 5, placeholder = "fill description here..." })
+            </div>
+        </div>
+    </div>
+</div>
+

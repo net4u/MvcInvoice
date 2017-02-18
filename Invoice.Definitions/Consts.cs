@@ -43,5 +43,10 @@ namespace Invoice.Definitions
         {
             public const string Error = "Error";
         }
+
+        public static class SessionDataType
+        {
+            public const string SEARCH_CRITERIA = "SeatchCriteria";
+        }
     }
 }
