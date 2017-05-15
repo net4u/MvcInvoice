@@ -129,6 +129,7 @@ a.inactive {
     animation: anim 40.5s infinite;
     -webkit-animation-timing-function: linear; /* Chrome, Safari, Opera */
     animation-timing-function: linear;
+    -webkit-transform: translateZ(0); /*fixes flickering animation in chrome*/
 }
 
     .currency-tracker-list:hover {
