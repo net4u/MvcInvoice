@@ -397,6 +397,10 @@
       <Name>Invoice.Definitions</Name>
       <Private>True</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Invoice.Service\Invoice.Service.csproj">
+      <Project>{8cb2180f-b942-4ff2-b5c6-5d9eff9f96e6}</Project>
+      <Name>Invoice.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

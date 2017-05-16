@@ -75,6 +75,7 @@
     <Compile Include="Company.cs">
       <DependentUpon>InvoiceModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\InvoiceDbContext.cs" />
     <Compile Include="Context\EfGenericRepository.cs" />
     <Compile Include="Context\EfUnitOfWork.cs" />
     <Compile Include="Context\IGenericRepository.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="FileAttachment.cs">
       <DependentUpon>InvoiceModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IContext.cs" />
     <Compile Include="Invoice.cs">
       <DependentUpon>InvoiceModel.tt</DependentUpon>
     </Compile>

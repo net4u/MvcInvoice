@@ -18,6 +18,9 @@ namespace Invoice.Site.App_Start
     using Ninject.Modules;
     using Ninject.Extensions.Logging.Log4net;
     using Ninject.Extensions.Logging;
+    using Invoice.Service.Interfaces;
+    using Invoice.Service.Services;
+    using Invoice.Database.Interfaces;
 
     public static class NinjectWebCommon 
     {
@@ -82,6 +85,20 @@ namespace Invoice.Site.App_Start
                 .InRequestScope()
                 .WithConstructorArgument("connectionString", 
                     "Data Source=.\\SQLEXPRESS;Initial Catalog=MvcInvoiceDb;user id=sa;password=fortuna;MultipleActiveResultSets=True");
+            kernel
+                .Bind<IContext>()
+                .To<InvoiceDbContext>()
+                .InRequestScope()
+                .WithConstructorArgument("connectionString",
+                    "Data Source=.\\SQLEXPRESS;Initial Catalog=MvcInvoiceDb;user id=sa;password=fortuna;MultipleActiveResultSets=True");
+            kernel
+                .Bind<IPostService>()
+                .To<PostService>()
+                .InRequestScope();
+            kernel
+                .Bind<IParameterService>()
+                .To<ParameterService>()
+                .InRequestScope();
             kernel
                 .Bind<IMapper>()
                 .ToConstant(mapperConfig.CreateMapper());

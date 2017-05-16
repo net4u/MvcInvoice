@@ -15,19 +15,20 @@ using Invoice.Database;
 using System.Data.Entity;
 using Invoice.Site.Attributes;
 using Ninject.Extensions.Logging;
+using Invoice.Service.Interfaces;
 
 namespace Invoice.Site.Controllers
 {
     [LogError(View = Consts.ErrorViewName.Error)]
     public partial class HomeController : Controller
     {
-        private IUnitOfWork _unitOfWork;
+        private IPostService _posts;
         private IMapper _mapper;
         private ILogger _logger;
 
-        public HomeController(IUnitOfWork unitOfWork, IMapper mapper, ILogger logger)
+        public HomeController(IPostService posts, IMapper mapper, ILogger logger)
         {
-            _unitOfWork = unitOfWork;
+            _posts = posts;
             _mapper = mapper;
             _logger = logger;
         }
@@ -35,7 +36,7 @@ namespace Invoice.Site.Controllers
         public virtual ActionResult Index()
         {
             var post = new PostEditModel();
-            var categories = _unitOfWork.PostCategorySdicRepository.GetAll();
+            var categories =  _posts.GetAllCategories();
             post.Categories = _mapper.Map<List<PostCategoryViewModel>>(categories);
 
             return View(post);
@@ -66,15 +67,14 @@ namespace Invoice.Site.Controllers
             }
 
                 var dbPost = _mapper.Map<Post>(post);
-                var categories = _unitOfWork.PostCategorySdicRepository.GetAll();
+                var categories = _posts.GetAllCategories();
                 foreach (var id in post.SelectedCategories)
                 {
                     dbPost.PostCategory_SDIC
                           .Add(categories.First(a => a.Id == id));
                 }
-                _unitOfWork.PostRepository.Add(dbPost);
-
-                _unitOfWork.Commit();
+                _posts.Add(dbPost);
+                _posts.Commit();
 
                 var model = _mapper.Map<PostViewModel>(dbPost);
                 model.Categories = _mapper.Map<List<PostCategoryViewModel>>(categories);
@@ -86,13 +86,7 @@ namespace Invoice.Site.Controllers
         [AjaxOnly]
         public virtual JsonResult GetPosts(int pageIndex, int pageSize)
         {
-            var dbPosts = _unitOfWork.PostRepository
-                                     .AsQueryable()
-                                     .Include(e => e.PostCategory_SDIC)
-                                     .OrderBy(e => e.Id)
-                                     .Skip(pageIndex * pageSize)
-                                     .Take(pageSize)
-                                     .ToList<Post>();
+            var dbPosts = _posts.GetPaged(pageIndex, pageSize);
             var models = _mapper.Map<List<PostViewModel>>(dbPosts);
             return Json(new { success = true, data = models }, JsonRequestBehavior.AllowGet);
         }

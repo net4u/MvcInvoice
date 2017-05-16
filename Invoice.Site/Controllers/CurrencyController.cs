@@ -12,18 +12,19 @@ using System.Threading.Tasks;
 using Ninject.Extensions.Logging;
 using Invoice.Site.Attributes;
 using System.IO;
+using Invoice.Service.Interfaces;
 
 namespace Invoice.Site.Controllers
 {
     public partial class CurrencyController : BaseController
     {
-        private IUnitOfWork _unitOfWork;
+        private IParameterService _parameters;
         private ICurrencyFeedReader _reader;
         private ILogger _logger;
 
-        public CurrencyController(IUnitOfWork unitOfWork, ICurrencyFeedReader reader, ILogger logger)
+        public CurrencyController(IParameterService parameters, ICurrencyFeedReader reader, ILogger logger)
         {
-            _unitOfWork = unitOfWork;
+            _parameters = parameters;
             _reader = reader;
             _logger = logger;
         }
@@ -35,8 +36,7 @@ namespace Invoice.Site.Controllers
 
             try
             {
-                ParameterGlobal parameter = _unitOfWork.ParameterGlobalRepository
-                                                       .SingleOrDefault(e => e.KeyName == Consts.Param.BANK_CURRENCY_EXCHANGE_URL);
+                var parameter = _parameters.GetById(Consts.Param.BANK_CURRENCY_EXCHANGE_URL);
                 if (parameter == null || string.IsNullOrEmpty(parameter.Value))
                 {
                    errorMsg = "No parameter for currency list defined";
