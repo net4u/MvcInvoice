@@ -2,7 +2,6 @@
 
 <div class="controls">
     <div class="row">
-        @Html.HiddenFor(model => model.Id)
         <div class="col-md-12">
             <div class="form-group">
                 @Html.LabelFor(model => model.Street)
@@ -31,20 +30,19 @@
                 @Html.TextBoxFor(model => model.PostCode, new { @class = "form-control", placeholder = "fill postal code here..." })
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-7">
             <div class="form-group">
                 @Html.LabelFor(model => model.City)
                 @Html.TextBoxFor(model => model.City, new { @class = "form-control", placeholder = "fill city here..." })
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-2">
             <div class="form-group">
                 @Html.LabelFor(model => model.SelectedCountryId)
-                @Html.DropDownListFor(model => model.SelectedCountryId, new SelectList(Model.Countries, "Id", "Symbol"), 
+                @Html.DropDownListFor(model => model.SelectedCountryId, new SelectList(Model.Countries, "Id", "Symbol"),
                     new { @class = "form-control", placeholder = "fill street here..." })
             </div>
         </div>
     </div>
+
  </div>

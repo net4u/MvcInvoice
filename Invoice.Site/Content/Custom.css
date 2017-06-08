@@ -263,3 +263,17 @@ a.inactive {
 .home-post-content {
     padding: 0.8em 0 0.5em 0;
 }
+
+/*
+
+    Company
+
+*/
+
+.company-list-body {
+    padding: 0.5em;
+}
+
+.company-list-table{
+    margin-bottom: 0;
+}

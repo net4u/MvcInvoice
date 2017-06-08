@@ -18,6 +18,8 @@ namespace Invoice.Database.Context
         public IDbSet<ParameterGlobal> ParameterGlobalRepository { get; set; }
         public IDbSet<Post> PostRepository { get; set; }
         public IDbSet<PostCategory_SDIC> PostCategorySdicRepository { get; set; }
+        public IDbSet<Currency_SDIC> CurrencySdicRepository { get; set; }
+        public IDbSet<Country_SDIC> CountrySdicRepository { get; set; }
 
         public InvoiceDbContext(string connectionString)
             : base(connectionString)

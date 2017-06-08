@@ -3,6 +3,9 @@
 <div class="controls">
 
     <div class="row">
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.BankAccountId)
+        @Html.HiddenFor(model => model.AddressId)
         <div class="col-md-6">
             <div class="form-group">
                 @Html.LabelFor(model => model.Name)
@@ -17,21 +20,19 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 @Html.LabelFor(model => model.Nip)
                 @Html.TextBoxFor(model => model.Nip, new { @class = "form-control", placeholder = "fill nip here..." })
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="form-group">
                 @Html.LabelFor(model => model.Regon)
                 @Html.TextBoxFor(model => model.Regon, new { @class = "form-control", placeholder = "fill regon here..." })
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4">
             <div class="form-group">
                 @Html.LabelFor(model => model.Email)
                 @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "fill e-mail here..." })

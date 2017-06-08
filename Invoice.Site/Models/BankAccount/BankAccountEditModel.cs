@@ -12,8 +12,8 @@ namespace Invoice.Site.Models.BankAccount
     {
         public int Id { get; set; }
 
-        [DisplayName("Name")]
-        [Required(ErrorMessage = "Header is required")]
+        [DisplayName("Name*")]
+        [Required(ErrorMessage = "Name is required")]
         [MaxLength(255, ErrorMessage = "Too much characters, max: 255")]
         public string BankName { get; set; }
 

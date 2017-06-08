@@ -18,6 +18,8 @@ namespace Invoice.Site.Models.Company
 
         public string Symbol { get; set; }
 
+        public bool InitSearch { get; set; }
+
         [DisplayName("Free Text")]
         [MaxLength(255, ErrorMessage = "Too much characters, max: 255")]
         public string FreeText { get; set; }

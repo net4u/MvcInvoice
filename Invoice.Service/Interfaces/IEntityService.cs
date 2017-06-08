@@ -12,7 +12,6 @@ namespace Invoice.Service.Interfaces
     {
         IQueryable<T> AsQueryable();
         IEnumerable<T> GetAll();
-        IEnumerable<T> GetPaged(int pageIndex, int pageSize);
         IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
         T Single(Expression<Func<T, bool>> predicate);
         T SingleOrDefault(Expression<Func<T, bool>> predicate);

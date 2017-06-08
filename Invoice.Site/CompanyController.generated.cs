@@ -64,21 +64,15 @@ namespace Invoice.Site.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Details()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Details);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult Edit()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Delete()
+        public virtual System.Web.Mvc.JsonResult Delete()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Delete);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -98,7 +92,6 @@ namespace Invoice.Site.Controllers
         {
             public readonly string Index = "Index";
             public readonly string Search = "Search";
-            public readonly string Details = "Details";
             public readonly string Create = "Create";
             public readonly string Edit = "Edit";
             public readonly string Delete = "Delete";
@@ -109,7 +102,6 @@ namespace Invoice.Site.Controllers
         {
             public const string Index = "Index";
             public const string Search = "Search";
-            public const string Details = "Details";
             public const string Create = "Create";
             public const string Edit = "Edit";
             public const string Delete = "Delete";
@@ -124,21 +116,13 @@ namespace Invoice.Site.Controllers
         {
             public readonly string searchCriteria = "searchCriteria";
         }
-        static readonly ActionParamsClass_Details s_params_Details = new ActionParamsClass_Details();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Details DetailsParams { get { return s_params_Details; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Details
-        {
-            public readonly string id = "id";
-        }
         static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Create
         {
-            public readonly string collection = "collection";
+            public readonly string model = "model";
         }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -147,7 +131,7 @@ namespace Invoice.Site.Controllers
         public class ActionParamsClass_Edit
         {
             public readonly string id = "id";
-            public readonly string collection = "collection";
+            public readonly string model = "model";
         }
         static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -156,7 +140,6 @@ namespace Invoice.Site.Controllers
         public class ActionParamsClass_Delete
         {
             public readonly string id = "id";
-            public readonly string collection = "collection";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -169,14 +152,20 @@ namespace Invoice.Site.Controllers
             public class _ViewNamesClass
             {
                 public readonly string _Company = "_Company";
+                public readonly string _CompanyList = "_CompanyList";
                 public readonly string _CompanySearch = "_CompanySearch";
                 public readonly string Create = "Create";
+                public readonly string Edit = "Edit";
                 public readonly string Index = "Index";
+                public readonly string Search = "Search";
             }
             public readonly string _Company = "~/Views/Company/_Company.cshtml";
+            public readonly string _CompanyList = "~/Views/Company/_CompanyList.cshtml";
             public readonly string _CompanySearch = "~/Views/Company/_CompanySearch.cshtml";
             public readonly string Create = "~/Views/Company/Create.cshtml";
+            public readonly string Edit = "~/Views/Company/Edit.cshtml";
             public readonly string Index = "~/Views/Company/Index.cshtml";
+            public readonly string Search = "~/Views/Company/Search.cshtml";
         }
     }
 
@@ -209,18 +198,6 @@ namespace Invoice.Site.Controllers
         }
 
         [NonAction]
-        partial void DetailsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult Details(int id)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Details);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            DetailsOverride(callInfo, id);
-            return callInfo;
-        }
-
-        [NonAction]
         partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
@@ -232,14 +209,14 @@ namespace Invoice.Site.Controllers
         }
 
         [NonAction]
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Web.Mvc.FormCollection collection);
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Invoice.Site.Models.Company.CompanyEditModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Create(System.Web.Mvc.FormCollection collection)
+        public override System.Web.Mvc.ActionResult Create(Invoice.Site.Models.Company.CompanyEditModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "collection", collection);
-            CreateOverride(callInfo, collection);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            CreateOverride(callInfo, model);
             return callInfo;
         }
 
@@ -256,40 +233,26 @@ namespace Invoice.Site.Controllers
         }
 
         [NonAction]
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, System.Web.Mvc.FormCollection collection);
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Invoice.Site.Models.Company.CompanyEditModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Edit(int id, System.Web.Mvc.FormCollection collection)
+        public override System.Web.Mvc.ActionResult Edit(Invoice.Site.Models.Company.CompanyEditModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "collection", collection);
-            EditOverride(callInfo, id, collection);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            EditOverride(callInfo, model);
             return callInfo;
         }
 
         [NonAction]
-        partial void DeleteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
+        partial void DeleteOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int id);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Delete(int id)
+        public override System.Web.Mvc.JsonResult Delete(int id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.Delete);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             DeleteOverride(callInfo, id);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void DeleteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, System.Web.Mvc.FormCollection collection);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult Delete(int id, System.Web.Mvc.FormCollection collection)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "collection", collection);
-            DeleteOverride(callInfo, id, collection);
             return callInfo;
         }
 

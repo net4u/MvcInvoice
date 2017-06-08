@@ -100,6 +100,10 @@ namespace Invoice.Site.App_Start
                 .To<ParameterService>()
                 .InRequestScope();
             kernel
+                .Bind<ICompanyService>()
+                .To<CompanyService>()
+                .InRequestScope();
+            kernel
                 .Bind<IMapper>()
                 .ToConstant(mapperConfig.CreateMapper());
 

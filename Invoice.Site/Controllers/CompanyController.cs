@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Invoice.Database.Context;
 using Invoice.Site.Models.Company;
+using Invoice.Site.Models.BankAccount;
+using Invoice.Site.Models.Address;
 using Ninject.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,28 +14,36 @@ using Invoice.Definitions;
 using Invoice.Database;
 using Invoice.Site.Extensions;
 using Invoice.Site.Attributes;
+using Invoice.Service.Interfaces;
+using Invoice.Service.DataObjects;
+using Invoice.Site.Models.Country;
+using Invoice.Site.Models.Currency;
 
 namespace Invoice.Site.Controllers
 {
     [LogError(View = Consts.ErrorViewName.Error)]
-    public partial class CompanyController : Controller
+    public partial class CompanyController : BaseController
     {
-        private IUnitOfWork _unitOfWork;
+        private ICompanyService _companies;
         private IMapper _mapper;
         private ILogger _logger;
 
-        public CompanyController(IUnitOfWork unitOfWork, IMapper mapper, ILogger logger)
+        public CompanyController(ICompanyService companies, IMapper mapper, ILogger logger)
         {
-            _unitOfWork = unitOfWork;
+            _companies = companies;
             _mapper = mapper;
             _logger = logger;
         }
 
-        // GET: Company
         public virtual ActionResult Index()
         {
-            var criteria = new CompanySearchViewModel() { PageIndex = 1, PageSize = 10, 
-                SortByList = Enums.CompanySortBy.Name.ToSelectList(), SortTypeList = Enums.SortOrder.Ascending.ToSelectList()};
+            var criteria = new CompanySearchViewModel()
+            {
+                PageIndex = 0,
+                PageSize = 10,
+                SortByList = Enums.CompanySortBy.Name.ToSelectList(),
+                SortTypeList = Enums.SortOrder.Ascending.ToSelectList()
+            };
             return View(criteria);
         }
 
@@ -41,116 +51,96 @@ namespace Invoice.Site.Controllers
         {
             Session[Consts.SessionDataType.SEARCH_CRITERIA] = searchCriteria;
 
-            var dbCompanies = _unitOfWork
-               .CompanyRepository
-               .AsQueryable()
-               .Include(e => e.Address)
-               .Include(e => e.BankAccount)
-               .Include(e => e.BankAccount.Currency_SDIC)
-               .Where(e => (string.IsNullOrEmpty(searchCriteria.Name) || e.Name.Contains(searchCriteria.Name)) && 
-               (string.IsNullOrEmpty(searchCriteria.Symbol) || e.Symbol.Contains(searchCriteria.Symbol)) &&
-               (string.IsNullOrEmpty(searchCriteria.FreeText) || true));
+            var dbCompanies = _companies.Search(_mapper.Map<CompanySearch>(searchCriteria));
+            var companies = _mapper.Map<List<CompanyViewModel>>(dbCompanies);
+            var model = new CompanySearchResultViewModel() { SearchResultList = companies };
 
-            var count = dbCompanies.Count();
-
-            bool isAsc = searchCriteria.SelectedSortType == (int)Enums.SortOrder.Ascending ? true : false;
-
-            switch (searchCriteria.SelectedSortBy)
+            if (ControllerContext.HttpContext.Request.IsAjaxRequest())
             {
-                case (int)Enums.CompanySortBy.Name:
-                    dbCompanies = isAsc ? dbCompanies.OrderBy(e => e.Name) : dbCompanies.OrderByDescending(e => e.Name);
-                    break;
-                case (int)Enums.CompanySortBy.Nip:
-                    dbCompanies = isAsc ? dbCompanies.OrderBy(e => e.Nip) : dbCompanies.OrderByDescending(e => e.Nip);
-                    break;
-                case (int)Enums.CompanySortBy.Regon:
-                    dbCompanies = isAsc ? dbCompanies.OrderBy(e => e.Regon) : dbCompanies.OrderByDescending(e => e.Regon);
-                    break;
-                case (int)Enums.CompanySortBy.Symbol:
-                    dbCompanies = isAsc ? dbCompanies.OrderBy(e => e.Symbol) : dbCompanies.OrderByDescending(e => e.Symbol);
-                    break;
-                default:
-                    break;
+                return Json(new { success = true, data = RenderPartialViewToString(MVC.Company.Views.Search, model) },
+                    JsonRequestBehavior.AllowGet);
             }
-
-            var companies = dbCompanies
-                .Skip(searchCriteria.PageIndex * searchCriteria.PageSize)
-                .Take(searchCriteria.PageSize)
-                .ToList<Company>();
-
-            return View(companies);
+            else
+            {
+                return View(model);
+            }
         }
 
-        // GET: Company/Details/5
-        public virtual ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Company/Create
         public virtual ActionResult Create()
         {
-            return View();
+            var model = new CompanyEditModel() { BankAccount = new BankAccountEditModel(), Address = new AddressEditModel() };
+            var currencies = _companies.GetAllCurrencies();
+            model.BankAccount.Currencies = _mapper.Map<List<CurrencyViewModel>>(currencies);
+            var countries = _companies.GetAllCountries();
+            model.Address.Countries = _mapper.Map<List<CountryViewModel>>(countries);
+            return View(model);
         }
 
-        // POST: Company/Create
         [HttpPost]
-        public virtual ActionResult Create(FormCollection collection)
+        public virtual ActionResult Create(CompanyEditModel model)
         {
-            try
+            var company = _mapper.Map<Company>(model);
+            _companies.Add(company);
+            _companies.Commit();
+            CompanySearchViewModel searchCriteria = (CompanySearchViewModel)Session[Consts.SessionDataType.SEARCH_CRITERIA];
+            if (searchCriteria == null)
             {
-                // TODO: Add insert logic here
+                searchCriteria = new CompanySearchViewModel()
+                {
+                    PageIndex = 1,
+                    PageSize = 10,
+                    SortByList = Enums.CompanySortBy.Name.ToSelectList(),
+                    SortTypeList = Enums.SortOrder.Ascending.ToSelectList()
+                };
+            }
+            searchCriteria.InitSearch = true;
 
-                return RedirectToAction(CompanyController.ActionNameConstants.Index);
-            }
-            catch
-            {
-                return View();
-            }
+            return View(MVC.Company.Views.Index, searchCriteria);
         }
 
-        // GET: Company/Edit/5
         public virtual ActionResult Edit(int id)
         {
-            return View();
+            var dbCompany = _companies.GetById(id);
+            var model = _mapper.Map<CompanyEditModel>(dbCompany);
+            var currencies = _companies.GetAllCurrencies();
+            model.BankAccount.Currencies = _mapper.Map<List<CurrencyViewModel>>(currencies);
+            var countries = _companies.GetAllCountries();
+            model.Address.Countries = _mapper.Map<List<CountryViewModel>>(countries);
+            return View(model);
         }
 
-        // POST: Company/Edit/5
         [HttpPost]
-        public virtual ActionResult Edit(int id, FormCollection collection)
+        public virtual ActionResult Edit(CompanyEditModel model)
         {
-            try
+            var company = _companies.GetById(model.Id);
+           _mapper.Map(model, company);
+            _companies.Commit();
+            CompanySearchViewModel searchCriteria = (CompanySearchViewModel)Session[Consts.SessionDataType.SEARCH_CRITERIA];
+            if (searchCriteria == null)
             {
-                // TODO: Add update logic here
+                searchCriteria = new CompanySearchViewModel()
+                {
+                    PageIndex = 1,
+                    PageSize = 10,
+                    SortByList = Enums.CompanySortBy.Name.ToSelectList(),
+                    SortTypeList = Enums.SortOrder.Ascending.ToSelectList()
+                };
+            }
+            searchCriteria.SortByList = Enums.CompanySortBy.Name.ToSelectList();
+            searchCriteria.SortTypeList = Enums.SortOrder.Ascending.ToSelectList();
+            searchCriteria.InitSearch = true;
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View(MVC.Company.Views.Index, searchCriteria);
         }
 
-        // GET: Company/Delete/5
-        public virtual ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Company/Delete/5
         [HttpPost]
-        public virtual ActionResult Delete(int id, FormCollection collection)
+        [AjaxOnly]
+        public virtual JsonResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            var company = _companies.GetById(id);
+            _companies.Delete(company);
+            _companies.Commit();
+            return Json(new { success = true });
         }
     }
 }

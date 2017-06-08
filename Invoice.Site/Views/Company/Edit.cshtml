@@ -1,9 +1,9 @@
 ﻿@model Invoice.Site.Models.Company.CompanyEditModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
 
-@using (@Html.BeginForm(MVC.Company.ActionNames.Create, MVC.Company.Name))
+@using (@Html.BeginForm(MVC.Company.ActionNames.Edit, MVC.Company.Name))
 {
     @Html.AntiForgeryToken()
 
@@ -33,10 +33,11 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-success btn-send">Create</button>
+                    <button type="submit" class="btn btn-success btn-send">Save</button>
                 </div>
             </div>
         </div>
     </div>
 }
+
 

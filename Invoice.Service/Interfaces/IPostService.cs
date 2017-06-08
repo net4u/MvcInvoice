@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Invoice.Service.Interfaces
 {
-    public interface IPostService : IEntityService<Post, int>
+    public interface IPostService : IEntityService<Post, int>, IPagedService<Post>
     {
         IEnumerable<PostCategory_SDIC> GetAllCategories();
     }

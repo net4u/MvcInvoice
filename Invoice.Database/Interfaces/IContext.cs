@@ -16,6 +16,8 @@ namespace Invoice.Database.Interfaces
         IDbSet<ParameterGlobal> ParameterGlobalRepository { get; }
         IDbSet<Post> PostRepository { get; }
         IDbSet<PostCategory_SDIC> PostCategorySdicRepository { get; }
+        IDbSet<Currency_SDIC> CurrencySdicRepository { get; set; }
+        IDbSet<Country_SDIC> CountrySdicRepository { get; set; }
 
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 

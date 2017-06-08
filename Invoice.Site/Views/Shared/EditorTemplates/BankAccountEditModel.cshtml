@@ -1,7 +1,6 @@
 ﻿@model Invoice.Site.Models.BankAccount.BankAccountEditModel
 <div class="controls">
     <div class="row">
-        @Html.HiddenFor(model => model.Id)
         <div class="col-md-12">
             <div class="form-group">
                 @Html.LabelFor(model => model.Number)
@@ -10,19 +9,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div class="form-group">
                 @Html.LabelFor(model => model.BankName)
                 @Html.TextBoxFor(model => model.BankName, new { @class = "form-control", placeholder = "fill bank name here..." })
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-2">
             <div class="form-group">
                 @Html.LabelFor(model => model.SelectedCurrencyId)
                 @Html.DropDownListFor(model => model.SelectedCurrencyId, new SelectList(Model.Currencies, "Id", "Symbol"),
-                    new { @class = "form-control"})
+                    new { @class = "form-control" })
             </div>
         </div>
     </div>

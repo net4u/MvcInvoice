@@ -32,11 +32,6 @@ namespace Invoice.Service.Base
             return _dbSet;
         }
 
-        public virtual IEnumerable<T> GetPaged(int pageIndex, int pageSize)
-        {
-            throw new NotImplementedException();
-        }
-
         public virtual IEnumerable<T> Find(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
         {
             return _dbSet.Where(predicate);
@@ -56,7 +51,6 @@ namespace Invoice.Service.Base
         {
             return _dbSet.First(predicate);
         }
-
 
         public virtual T GetById(U id)
         {

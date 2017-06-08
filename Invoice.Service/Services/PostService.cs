@@ -15,16 +15,16 @@ namespace Invoice.Service.Services
     {
         public IEnumerable<PostCategory_SDIC> GetAllCategories()
         {
-            return _dbContext.PostCategorySdicRepository;
+            return _dbContext.PostCategorySdicRepository.OrderBy(e => e.OrderNumber);
         }
 
-        public override IEnumerable<Post> GetPaged(int pageIndex, int pageSize)
+        public IEnumerable<Post> GetPaged(int pageIndex, int pageSize)
         {
             return _dbSet
-                    .Include(e => e.PostCategory_SDIC)
-                    .OrderBy(e => e.Id)
-                    .Skip(pageIndex * pageSize)
-                    .Take(pageSize);
+                   .Include(e => e.PostCategory_SDIC)
+                   .OrderBy(e => e.Id)
+                   .Skip(pageIndex * pageSize)
+                   .Take(pageSize);
         }
 
         public PostService(IContext dbContext) :base(dbContext)
@@ -32,5 +32,6 @@ namespace Invoice.Service.Services
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<Post>();
         }
+
     }
 }
