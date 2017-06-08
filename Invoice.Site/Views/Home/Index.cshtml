@@ -38,6 +38,8 @@
             </div>
 
             <div id="content-container">
+                <input type="hidden" id="post-content-url" value="@Url.Action(MVC.Home.ActionNames.GetPosts, MVC.Home.Name)" />
+                @*for ajax fill*@
             </div>
 
             <div id="content-load-progress" class="ajax-page-loading">

@@ -31,9 +31,9 @@
        </div>
    </div>*@
 
-
     <div id="currenny-tracker-placeholder" class="container">
-     @*for ajax fill*@
+        <input type="hidden" id="currency-tracker-url" value="@Url.Action(MVC.Currency.ActionNames.Index, MVC.Currency.Name)" />
+        @*for ajax fill*@
     </div>
 
     @Html.Partial(MVC.Account.Views.LoginModal, new Invoice.Site.Models.LoginViewModel())

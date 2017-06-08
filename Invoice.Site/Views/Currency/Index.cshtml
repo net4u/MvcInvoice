@@ -7,14 +7,14 @@
     <img id="curr-stop-image" src="~/Images/stop-icon-white.png" alt="STOP" class="img-responsive center-block img-center" />
 </div>
 <div id="curr-panel" class="currency-tracker-panel">
-        @{
-            string txt = string.Empty;
-            foreach (var item in @Model)
-            {
-                txt += " " + item.Symbol + ":" + item.Rate.ToString();
-                @*<span style="padding:6px">@item.Symbol: @item.Rate.ToString()</span>*@
+    @{
+        string txt = string.Empty;
+        foreach (var item in @Model)
+        {
+            txt += " " + item.Symbol + ":" + item.Rate.ToString();
+            @*<span style="padding:6px">@item.Symbol: @item.Rate.ToString()</span>*@
 
-            }
-            <p id="curr-list" class="currency-tracker-list">@txt</p>
-}
+        }
+        <p id="curr-list" class="currency-tracker-list">@txt</p>
+    }
 </div>

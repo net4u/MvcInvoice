@@ -26,18 +26,20 @@ function ValidateHidden(formId) {
 }
 
 function LoadCurrencyTracker() {
+    var currencyTrackerUrl = $('#currency-tracker-url').val();
     $.ajax({
         type: 'GET',
-        url: '/Currency/Index',
+        url: currencyTrackerUrl,
         datatype: 'json',
         success: function (response) {
-            if ((response != null) && (response.success)) {
+            if (response && response.success) {
                 $("#currenny-tracker-placeholder").html(response.data);
                 $("#curr-stop").click(function () {
                     $("#curr-list").toggleClass("animation-paused");
                 });
             }
             else {
+                $("#ajax-error-placeholder").html(bsMSG("unhandled error while loading currencies", 'danger', false, true));
                 $("#currenny-tracker-placeholder").hide();
             }
         },
@@ -45,6 +47,7 @@ function LoadCurrencyTracker() {
             $("#currenny-tracker-placeholder").show();
         },
         error: function () {
+            $("#ajax-error-placeholder").html(bsMSG("unhandled error while loading currencies", 'danger', false, true));
             $("#currenny-tracker-placeholder").hide();
         }
 

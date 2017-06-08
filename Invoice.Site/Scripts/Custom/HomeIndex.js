@@ -38,7 +38,7 @@ $(function () {
 
         $.ajax({
             type: 'POST',
-            url: "/Home/CREATE",
+            url: this.action,
             data: formData,
             cache: false,
             contentType: false,
@@ -87,18 +87,24 @@ $(function () {
 });
 
 function GetPosts() {
+    var postUrl = $('#post-content-url').val();
     $.ajax({
         type: 'GET',
-        url: '/home/GetPosts',
+        url: postUrl,
         data: { "pageindex": pageIndex, "pagesize": pageSize },
         datatype: 'json',
         success: function (response) {
-            if ((response != null) && (response.data != null)) {
-                var className = "";
-                for (var i = 0; i < response.data.length; i++) {
-                    $("#content-container").append(CreatePostView(response.data[i]));
+            if (response && response.success) {
+                if ((response != null) && (response.data != null)) {
+                    var className = "";
+                    for (var i = 0; i < response.data.length; i++) {
+                        $("#content-container").append(CreatePostView(response.data[i]));
+                    }
+                    pageIndex++;
                 }
-                pageIndex++;
+            }
+            else {
+                $("#ajax-error-placeholder").html(bsMSG("unhandled error while loading posts", 'danger', false, true));
             }
         },
         beforeSend: function () {
